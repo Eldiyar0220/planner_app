@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>757265826712-9nmiftud0sra106jb9lt5u7uu928n884.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.757265826712-9nmiftud0sra106jb9lt5u7uu928n884</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDw1QnbkD1sclKfpGmAExxXNmDy7KqOiiA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>757265826712</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.kyzJubek</string>
+	<key>PROJECT_ID</key>
+	<string>kyz-jibek</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kyz-jibek.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:757265826712:ios:acbf0ee390d2e4ebbe61ed</string>
+</dict>
+</plist>
