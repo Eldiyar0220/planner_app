@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
+import 'package:kyz_jubek/feature/home/presentation/widgets/show_feel_dialog.dart';
 import 'package:kyz_jubek/feature/info/info_screen.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_decoration.dart';
@@ -103,8 +104,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                       const SizedBox(height: 10.0),
                       MainSimpleButton(
-                        onTap: () {
-                          
+                        onTap: () async {
+                          await showFeelDialog(context);
                         },
                         title: 'Как вы себы чувствуете?',
                       ),
