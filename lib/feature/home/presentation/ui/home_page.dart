@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 750),
                   height: isShowQrCode.value ? mQu * 0.7 : 0,
-                  curve: Curves.fastEaseInToSlowEaseOut,
+                  // curve: Curves.fastEaseInToSlowEaseOut,
                   width: mQu,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(

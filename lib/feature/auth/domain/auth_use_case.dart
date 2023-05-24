@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:kyz_jubek/core/constants/app_text_constants.dart';
 import 'package:kyz_jubek/core/local_storage/local_storage.dart';
 import 'package:kyz_jubek/feature/auth/data/auth_repo.dart';
@@ -32,13 +30,11 @@ class AuthUseCase {
     if (userFrom != null) {
       user = userFrom;
     }
-    log('EDU1 ${user.email}');
-    log('EDU1 ${user.name}');
-    log('EDU1 ${user.uid}');
 
     LocalStorage.saveData(SharedKeys.authEmail, user.email);
     LocalStorage.saveData(SharedKeys.name, user.name);
     LocalStorage.saveData(SharedKeys.uid, user.uid);
+    LocalStorage.saveData(SharedKeys.image, user.image);
 
     return user;
   }

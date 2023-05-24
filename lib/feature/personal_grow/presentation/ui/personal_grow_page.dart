@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyz_jubek/core/components/loading_indicator.dart';
@@ -33,7 +31,6 @@ class PersonalGrowPage extends StatelessWidget {
           ),
           body: BlocBuilder<PersonalGrowCubit, PersonalGrowState>(
             builder: (context, state) {
-              log('state $state');
               return state.when(
                 success: (
                   books,
@@ -43,15 +40,12 @@ class PersonalGrowPage extends StatelessWidget {
                     TabBarView(
                   children: <Widget>[
                     TabBarPage(
-                      title: 'Книг',
                       model: books,
                     ),
                     TabBarPage(
-                      title: 'Фильмы',
                       model: films,
                     ),
                     TabBarPage(
-                      title: 'Страны',
                       model: country,
                     ),
                   ],

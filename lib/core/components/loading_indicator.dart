@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 
 class LoadingIndicator extends StatelessWidget {
   const LoadingIndicator({
     Key? key,
-    this.color = AppColors.red,
+    this.color = AppColors.color38B6FFBLue,
     this.strokeWidth = 2.5,
     this.radius = 24,
   }) : super(key: key);
