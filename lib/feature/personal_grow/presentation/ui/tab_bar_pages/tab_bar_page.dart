@@ -44,7 +44,7 @@ class TabBarPage extends StatelessWidget {
             padding: const EdgeInsets.only(right: 5),
             height: 80,
             width: 140,
-            decoration: AppDecorations.defaultDeco(color: AppColors.grey),
+            decoration: AppDecorations.defaultDeco(color: AppColors.color38B6FFBLue),
             child: Row(
               children: [
                 Container(

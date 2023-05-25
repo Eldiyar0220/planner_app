@@ -38,6 +38,7 @@ class _BottomNavigatorState extends State<BottomNavigatorPage> {
             topRight: Radius.circular(0),
           ),
           child: BottomNavigationBar(
+            
             backgroundColor: AppColors.color38B6FFBLue,
             type: BottomNavigationBarType.fixed,
             unselectedFontSize: 10,

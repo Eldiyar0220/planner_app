@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Timer(const Duration(milliseconds: 350), () {
+    Timer(const Duration(milliseconds: 220), () {
       isShowQrCode.value = true;
     });
   }
@@ -49,7 +49,8 @@ class _HomePageState extends State<HomePage> {
                 width: 205,
                 alignment: Alignment.center,
                 decoration: AppDecorations.defaultDeco(
-                    color: AppColors.color38B6FFBLue),
+                  color: AppColors.color38B6FFBLue,
+                ),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Column(
@@ -79,9 +80,8 @@ class _HomePageState extends State<HomePage> {
               ),
               const Spacer(),
               AnimatedContainer(
-                duration: const Duration(milliseconds: 750),
+                duration: const Duration(milliseconds: 550),
                 height: isShowQrCode.value ? mQu * 0.7 : 0,
-                // curve: Curves.fastEaseInToSlowEaseOut,
                 width: mQu,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
