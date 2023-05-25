@@ -6,6 +6,7 @@ import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
 import 'package:kyz_jubek/feature/home/presentation/widgets/show_feel_dialog.dart';
 import 'package:kyz_jubek/feature/info/info_screen.dart';
+import 'package:kyz_jubek/feature/reports/report_main_screen.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_decoration.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
@@ -114,7 +115,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                       const SizedBox(height: 10.0),
                       MainSimpleButton(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ReportMainScreen(),
+                            ),
+                          );
+                        },
                         title: 'Подвести итоги',
                       ),
                     ],
