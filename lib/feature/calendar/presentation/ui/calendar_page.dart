@@ -6,14 +6,14 @@ class CalendarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomAppBar(
+    return Scaffold(
+      appBar: const CustomAppBar(
         title: 'Calendare',
         isCanPop: false,
       ),
       body: Center(
         child: Column(
-          children: [
+          children: const [
             Text('soon create calendar\n под вопрос ??'),
           ],
         ),
