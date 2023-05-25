@@ -53,9 +53,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(splashFactory: NoSplash.splashFactory),
       title: 'Flutter Demo',
-      home: SplashPage(),
+      home: const SplashPage(),
     );
   }
 }

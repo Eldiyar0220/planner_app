@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:kyz_jubek/core/components/custom_route_anim.dart';
 import 'package:kyz_jubek/feature/personal_grow/data/models/personal_grow_model.dart';
+import 'package:kyz_jubek/feature/personal_grow/presentation/personal_detail_page.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_decoration.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
@@ -9,9 +11,11 @@ class TabBarPage extends StatelessWidget {
   const TabBarPage({
     super.key,
     required this.model,
+    required this.title,
   });
 
   final List<PersonalGrowModel> model;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +27,19 @@ class TabBarPage extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         final item = model[index];
         return InkWell(
-          //
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              StandardUniversalAnimations(
+                child: PersonalDetailPage(
+                  title: title,
+                  model: item,
+                ),
+                milliSecondsToShow: 300,
+                milliSecondsToClose: 300,
+              ),
+            );
+          },
           child: Container(
             padding: const EdgeInsets.only(right: 5),
             height: 80,

@@ -36,6 +36,8 @@ class InfoScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16),
                               child: ListView.separated(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
                                 itemCount: model.length,
                                 separatorBuilder: (context, index) =>
                                     const SizedBox(height: 12),

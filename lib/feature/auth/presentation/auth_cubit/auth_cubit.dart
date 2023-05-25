@@ -29,7 +29,6 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   signOut() async {
-    emit(const AuthState.loading());
     await googleSignIn.signOut();
     LocalStorage.clearData();
     emit(const AuthState.singOut());

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kyz_jubek/feature/calendar/presentation/ui/calendar_page.dart';
 import 'package:kyz_jubek/feature/home/presentation/ui/home_page.dart';
 import 'package:kyz_jubek/feature/personal_grow/presentation/ui/personal_grow_page.dart';
-import 'package:kyz_jubek/feature/profile/profile_screen.dart';
+import 'package:kyz_jubek/feature/profile/presentation/ui/profile_page.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_decoration.dart';
 
@@ -38,7 +38,7 @@ class _BottomNavigatorState extends State<BottomNavigatorPage> {
             topRight: Radius.circular(0),
           ),
           child: BottomNavigationBar(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: AppColors.color38B6FFBLue,
             type: BottomNavigationBarType.fixed,
             unselectedFontSize: 10,
             selectedFontSize: 10,

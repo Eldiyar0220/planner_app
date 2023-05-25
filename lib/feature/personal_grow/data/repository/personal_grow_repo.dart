@@ -23,7 +23,7 @@ class GetFromFireBaseImpl implements GetFromFireBase {
 
   @override
   Future<List<PersonalGrowModel>> getBooks() async {
-    final books = await getData('info');
+    final books = await getData('books');
 
     return books.docs
         .map<PersonalGrowModel>((e) => PersonalGrowModel.fromJson(e))

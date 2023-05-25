@@ -9,14 +9,20 @@ class ProfileWidget extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.onTap,
+    this.color,
   });
   final String title;
   final IconData icon;
   final Function() onTap;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      splashFactory: NoSplash.splashFactory,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       onTap: onTap,
       child: Column(
         children: [
@@ -26,7 +32,7 @@ class ProfileWidget extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
-              color: AppColors.color38B6FFBLue,
+              color: color ?? AppColors.color38B6FFBLue,
             ),
             child: Row(
               children: [

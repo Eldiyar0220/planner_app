@@ -5,8 +5,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
     required this.title,
+    this.isCanPop = true,
   });
   final String title;
+  final bool isCanPop;
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
   @override
@@ -16,6 +18,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         title: Text(title),
         centerTitle: true,
+        leading: isCanPop
+            ? IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.arrow_back_ios),
+              )
+            : const SizedBox.shrink(),
         elevation: 0,
         backgroundColor: AppColors.color38B6FFBLue,
       ),

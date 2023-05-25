@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:kyz_jubek/core/components/custom_app_bar.dart';
 import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
 import 'package:kyz_jubek/feature/home/presentation/widgets/show_feel_dialog.dart';
@@ -32,8 +33,9 @@ class _HomePageState extends State<HomePage> {
     final mQu = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        title: const Text('Главное меню'),
+      appBar: const CustomAppBar(
+        title: 'Главное меню',
+        isCanPop: false,
       ),
       body: ValueListenableBuilder(
         valueListenable: isShowQrCode,
@@ -45,7 +47,8 @@ class _HomePageState extends State<HomePage> {
                 height: 205,
                 width: 205,
                 alignment: Alignment.center,
-                decoration: AppDecorations.defaultDeco(color: Colors.blue),
+                decoration: AppDecorations.defaultDeco(
+                    color: AppColors.color38B6FFBLue),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Column(
@@ -84,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                     topRight: Radius.circular(25),
                     topLeft: Radius.circular(25),
                   ),
-                  color: AppColors.blue,
+                  color: AppColors.color38B6FFBLue,
                 ),
                 child: SingleChildScrollView(
                   padding:

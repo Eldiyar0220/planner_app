@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kyz_jubek/core/constants/app_text_constants.dart';
 import 'package:kyz_jubek/core/local_storage/local_storage.dart';
@@ -6,6 +7,7 @@ import 'package:kyz_jubek/feature/auth/presentation/ui/auth_page.dart';
 import 'package:kyz_jubek/feature/navigation/presentation/ui/navigation_page.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -52,13 +54,50 @@ class _SplashPageState extends State<SplashPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              height: 140,
-              width: 140,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(100),
-              ),
+            FutureBuilder(
+              future: LocalStorage.readData(SharedKeys.image),
+              builder: (context, image) {
+                if (image.hasData) {
+                  return CachedNetworkImage(
+                    imageUrl: image.data!,
+                    placeholder: (_, url) {
+                      return Container(
+                        height: 140,
+                        width: 140,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey.withOpacity(0.4),
+                          highlightColor: Colors.white,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.grey,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    imageBuilder: (_, imageProvider) {
+                      return Container(
+                        height: 140,
+                        width: 140,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: CachedNetworkImageProvider(
+                              image.data!,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
+                return const SizedBox();
+              },
             ),
             const SizedBox(height: 20.0),
             AnimatedTextKit(

@@ -15,7 +15,7 @@ import 'package:shimmer/shimmer.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({
-    super.key,
+    Key? key,
     required this.image,
     required this.name,
   });
@@ -38,6 +38,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const CustomAppBar(title: 'Редактирование профиля'),
       body: SafeArea(
         child: Padding(
@@ -60,18 +61,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   }
                 },
                 child: image != widget.image
-                    ? Container(
-                        height: 100,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: FileImage(
-                              File(image),
+                    ? Stack(
+                        children: [
+                          Container(
+                            height: 100,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: FileImage(
+                                  File(image),
+                                ),
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            fit: BoxFit.cover,
                           ),
-                        ),
+                          Positioned(
+                            right: 0,
+                            bottom: 0,
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: const Icon(Icons.add),
+                            ),
+                          ),
+                        ],
                       )
                     : CachedNetworkImage(
                         imageUrl: image,
@@ -95,18 +113,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           );
                         },
                         imageBuilder: (_, imageProvider) {
-                          return Container(
-                            height: 100,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: CachedNetworkImageProvider(
-                                  image,
+                          return Stack(
+                            children: [
+                              Container(
+                                height: 100,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: CachedNetworkImageProvider(
+                                      image,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                                fit: BoxFit.cover,
                               ),
-                            ),
+                              Positioned(
+                                right: 0,
+                                bottom: 0,
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: const Icon(Icons.add),
+                                ),
+                              ),
+                            ],
                           );
                         },
                       ),

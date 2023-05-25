@@ -9,11 +9,13 @@ class MainSimpleButton extends StatelessWidget {
     required this.onTap,
     required this.title,
     this.height = 60,
+    this.color,
   });
 
   final Function() onTap;
   final String title;
   final double height;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class MainSimpleButton extends StatelessWidget {
         height: height,
         width: MediaQuery.of(context).size.width,
         decoration: AppDecorations.defaultDeco(
-          color: AppColors.black.withOpacity(0.3),
+          color: color ?? AppColors.black.withOpacity(0.3),
         ),
         child: Text(
           title,
