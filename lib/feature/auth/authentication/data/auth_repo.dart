@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kyz_jubek/feature/auth/data/user_model.dart';
+import 'package:kyz_jubek/feature/auth/authentication/data/user_model.dart';
 
 abstract class GetAuthRepo {
   Future<UserModel?> setUser(UserModel model);

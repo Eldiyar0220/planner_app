@@ -31,6 +31,8 @@ dependencies:
   pie_chart: ^5.3.2
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  pin_code_fields: ^7.4.0
+  another_flushbar: ^1.12.30
 
 dev_dependencies:
   flutter_test:
