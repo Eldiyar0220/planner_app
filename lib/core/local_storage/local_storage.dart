@@ -1,4 +1,3 @@
-import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
@@ -37,6 +36,4 @@ class LocalStorage {
     final pref = await SharedPreferences.getInstance();
     return pref.clear();
   }
-
- 
 }

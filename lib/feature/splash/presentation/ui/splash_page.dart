@@ -2,8 +2,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:kyz_jubek/core/constants/app_text_constants.dart';
 import 'package:kyz_jubek/core/local_storage/local_storage.dart';
-import 'package:kyz_jubek/feature/auth/presentation/ui/auth_page.dart';
-import 'package:kyz_jubek/feature/navigation/presentation/ui/navigation_page.dart';
+import 'package:kyz_jubek/feature/auth/authentication/presentation/ui/auth_page.dart';
+import 'package:kyz_jubek/feature/auth/pin_code/presentation/ui/pin_code_page.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
 
@@ -27,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
     final isLogged = await LocalStorage.readData(SharedKeys.authEmail);
 
     if (isLogged != null) {
-      funcToPush(const BottomNavigatorPage(), '/navigation');
+      funcToPush(const PinCodePage(), '/pin_code');
     } else {
       funcToPush(const AuthPage(), '/auth');
     }

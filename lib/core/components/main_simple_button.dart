@@ -10,12 +10,14 @@ class MainSimpleButton extends StatelessWidget {
     required this.title,
     this.height = 60,
     this.color,
+    this.isLoading = false,
   });
 
   final Function() onTap;
   final String title;
   final double height;
   final Color? color;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +31,12 @@ class MainSimpleButton extends StatelessWidget {
         decoration: AppDecorations.defaultDeco(
           color: color ?? AppColors.black.withOpacity(0.3),
         ),
-        child: Text(
-          title,
-          style: AppTextStyles.s15W400(color: AppColors.white),
-        ),
+        child: isLoading
+            ? const CircularProgressIndicator()
+            : Text(
+                title,
+                style: AppTextStyles.s15W400(color: AppColors.white),
+              ),
       ),
     );
   }

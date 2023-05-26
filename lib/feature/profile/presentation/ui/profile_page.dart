@@ -6,8 +6,8 @@ import 'package:kyz_jubek/core/components/main_simple_button.dart';
 import 'package:kyz_jubek/core/constants/app_text_constants.dart';
 import 'package:kyz_jubek/core/local_storage/local_storage.dart';
 import 'package:kyz_jubek/feature/areas_of_life/areas_main_screen.dart';
-import 'package:kyz_jubek/feature/auth/presentation/auth_cubit/auth_cubit.dart';
-import 'package:kyz_jubek/feature/auth/presentation/ui/auth_page.dart';
+import 'package:kyz_jubek/feature/auth/authentication/presentation/auth_cubit/auth_cubit.dart';
+import 'package:kyz_jubek/feature/auth/authentication/presentation/ui/auth_page.dart';
 import 'package:kyz_jubek/feature/profile/edit_profile_screen.dart';
 import 'package:kyz_jubek/feature/profile/presentation/ui/widgets/profile_widget.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
@@ -185,6 +185,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   color: Colors.red,
                                   height: 50,
                                   onTap: () {
+                                    LocalStorage.clearData();
                                     BlocProvider.of<AuthCubit>(context)
                                         .signOut();
                                     Navigator.pushAndRemoveUntil(

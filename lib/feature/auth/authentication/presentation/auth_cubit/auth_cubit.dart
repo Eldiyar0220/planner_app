@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyz_jubek/core/local_storage/local_storage.dart';
-import 'package:kyz_jubek/feature/auth/data/user_model.dart';
-import 'package:kyz_jubek/feature/auth/domain/auth_use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kyz_jubek/feature/auth/authentication/data/user_model.dart';
+import 'package:kyz_jubek/feature/auth/authentication/domain/auth_use_case.dart';
 
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';
