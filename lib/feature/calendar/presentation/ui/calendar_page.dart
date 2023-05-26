@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:kyz_jubek/core/components/custom_app_bar.dart';
 import 'package:kyz_jubek/core/components/date_formates.dart';
+import 'package:kyz_jubek/feature/calendar/data/model.dart';
 import 'package:kyz_jubek/feature/calendar/presentation/accounting_finance.dart';
+import 'package:kyz_jubek/feature/calendar/presentation/list_deals_page.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_decoration.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
@@ -49,7 +51,14 @@ class CalendarPage extends StatelessWidget {
                 ),
                 const Spacer(),
                 _CalendarContainerWidget(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ListDealsPage(),
+                      ),
+                    );
+                  },
                   title: 'Список \nдел',
                 ),
               ],
@@ -74,16 +83,11 @@ class CalendarPage extends StatelessWidget {
                     style: AppTextStyles.s24W300(),
                   ),
                   const SizedBox(height: 10.0),
-                  const TableBodyWidget(
-                    children1: [
-                      'First',
-                    ],
-                    children2: [
-                      'Second',
-                    ],
-                    children3: [
-                      'Third',
-                    ],
+                  TableBodyWidget(
+                    heightOfListView: MediaQuery.of(context).size.height * 0.4,
+                    children1: const [],
+                    children2: const [],
+                    children3: const [],
                   )
                 ],
               ),
@@ -111,15 +115,14 @@ class TableBodyWidget extends StatelessWidget {
   final String title2;
   final String title3;
 
-  final List<String> children1;
-  final List<String> children2;
-  final List<String> children3;
+  final List<TableModel> children1;
+  final List<TableModel> children2;
+  final List<TableModel> children3;
   final double heightOfListView;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: AppColors.white,
@@ -145,35 +148,52 @@ class TableBodyWidget extends StatelessWidget {
               SizedBox(
                 height: heightOfListView,
                 child: ListView.separated(
-                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.only(
+                    right: 10,
+                    left: 10,
+                    top: 5,
+                    bottom: 5,
+                  ),
                   itemCount: children1.length,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(height: 10.0);
-                  },
-                  itemBuilder: (BuildContext context, int index) =>
-                      const Text('text'),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(height: 10.0),
+                  itemBuilder: (BuildContext context, int index) => Text(
+                      '${index + 1}. ${dateFormatMain.format(children1[index].date)}'),
                 ),
               ),
               SizedBox(
                 height: heightOfListView,
                 child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.only(
+                    right: 10,
+                    left: 10,
+                    top: 5,
+                    bottom: 5,
+                  ),
                   itemCount: children2.length,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(height: 10.0);
-                  },
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(height: 10.0),
                   itemBuilder: (BuildContext context, int index) =>
-                      const Text('text'),
+                      Text(children2[index].title2),
                 ),
               ),
               SizedBox(
                 height: heightOfListView,
                 child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.only(
+                    right: 10,
+                    left: 10,
+                    top: 5,
+                    bottom: 5,
+                  ),
                   itemCount: children3.length,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(height: 10.0);
-                  },
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(height: 10.0),
                   itemBuilder: (BuildContext context, int index) =>
-                      const Text('text'),
+                      Text(children3[index].title3),
                 ),
               ),
             ],
@@ -199,7 +219,10 @@ class _TableTitleWidget extends StatelessWidget {
         bottom: 10,
       ),
       alignment: Alignment.center,
-      child: Text(title),
+      child: Text(
+        title,
+        style: AppTextStyles.s14W600(),
+      ),
     );
   }
 }
