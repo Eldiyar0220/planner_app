@@ -36,8 +36,8 @@ class _ListDealsPageState extends State<ListDealsPage> {
       appBar: AppBar(
         title: const Text('List Deals'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
         child: Column(
           children: [
             Text(

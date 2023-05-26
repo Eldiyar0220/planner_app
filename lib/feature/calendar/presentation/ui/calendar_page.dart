@@ -241,8 +241,8 @@ class _CalendarContainerWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 110,
-        width: 180,
+        height: MediaQuery.of(context).size.width * 0.28,
+        width: MediaQuery.of(context).size.width * 0.4,
         decoration: AppDecorations.defaultDeco(
           color: AppColors.color38B6FFBLue,
         ),
