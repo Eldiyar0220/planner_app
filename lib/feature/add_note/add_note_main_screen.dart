@@ -4,8 +4,8 @@ import 'package:kyz_jubek/feature/reports/widgets/smile_tab_screen.dart';
 import 'package:kyz_jubek/feature/reports/widgets/works_tab_screen.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 
-class ReportMainScreen extends StatelessWidget {
-  const ReportMainScreen({super.key});
+class AddNoteMainScreen extends StatelessWidget {
+  const AddNoteMainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +15,13 @@ class ReportMainScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.color38B6FFBLue,
-          title: const Text('Отчеты'),
+          title: const Text('Добавить запись'),
           bottom: const TabBar(
             dividerColor: Colors.transparent,
             tabs: <Widget>[
-              Tab(text: 'Дела'),
-              Tab(text: 'Финансы'),
-              Tab(text: 'Настроение'),
+              Tab(text: 'Благодарность'),
+              Tab(text: 'Идеи'),
+              Tab(text: 'Победы'),
             ],
           ),
         ),

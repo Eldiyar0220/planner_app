@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
               const Spacer(),
               AnimatedContainer(
                 duration: const Duration(milliseconds: 550),
-                height: isShowQrCode.value ? mQu * 0.7 : 0,
+                height: isShowQrCode.value ? mQu * 0.9 : 0,
                 width: mQu,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -108,6 +108,18 @@ class _HomePageState extends State<HomePage> {
                       ),
                       const SizedBox(height: 10.0),
                       MainSimpleButton(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const InfoScreen(),
+                            ),
+                          );
+                        },
+                        title: 'Добавить запись',
+                      ),
+                      const SizedBox(height: 10.0),
+                      MainSimpleButton(
                         onTap: () async {
                           await showFeelDialog(context);
                         },
@@ -125,6 +137,7 @@ class _HomePageState extends State<HomePage> {
                         },
                         title: 'Подвести итоги',
                       ),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),

@@ -10,10 +10,10 @@ class AccountingFinance extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Accounting'),
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
-          children: [
+          children: const [
             Text('Доход на __/__/_____'),
             TableBodyWidget(
               children1: [
