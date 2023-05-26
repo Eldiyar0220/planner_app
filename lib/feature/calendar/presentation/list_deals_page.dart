@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
 import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
 import 'package:kyz_jubek/feature/calendar/domain/calendar_interactor.dart';
@@ -41,15 +42,18 @@ class _ListDealsPageState extends State<ListDealsPage> {
         child: Column(
           children: [
             Text(
-              'Расход на __ /__ /_____',
+              'Расход на ${listDeals.isNotEmpty ? dateFormatMain.format(listDeals.first.date) : '__ /__ /____'}',
               style: AppTextStyles.s22W700(),
             ),
             const SizedBox(height: 10.0),
             TableBodyWidget(
+              onTap: (model) {
+                setState(() {});
+                listDeals.remove(model);
+              },
+              tableName: 'listDeals',
               heightOfListView: MediaQuery.of(context).size.height * 0.65,
               children1: listDeals,
-              children2: listDeals,
-              children3: listDeals,
             ),
             const SizedBox(height: 20.0),
             MainSimpleButton(

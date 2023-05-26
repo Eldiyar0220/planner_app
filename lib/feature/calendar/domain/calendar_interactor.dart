@@ -14,4 +14,15 @@ class CalendarInteractorImpl {
     final boxTable = await Hive.openBox<TableModel>(tableName);
     await boxTable.add(tableModel);
   }
+
+  static Future<void> deleteLoveDiary({
+    required String tableName,
+    required String title,
+  }) async {
+    final bmiBox = await Hive.openBox<TableModel>(tableName);
+    final loveModel =
+        bmiBox.values.toList().singleWhere((e) => e.title2 == title);
+    await loveModel.delete();
+    await bmiBox.compact();
+  }
 }

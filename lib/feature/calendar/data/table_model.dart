@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'table_model.g.dart';
 
 @HiveType(typeId: 1)
-class TableModel {
+class TableModel extends HiveObject {
   @HiveField(0)
   final DateTime date;
   @HiveField(1)
@@ -18,5 +18,6 @@ class TableModel {
   });
 
   @override
-  String toString() => 'TableModel(date: $date, title2: $title2, title3: $title3)';
+  String toString() =>
+      'TableModel(date: $date, title2: $title2, title3: $title3,  ';
 }
