@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:kyz_jubek/core/components/custom_app_bar.dart';
 import 'package:kyz_jubek/core/components/date_formates.dart';
-import 'package:kyz_jubek/feature/calendar/data/model.dart';
+import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
 import 'package:kyz_jubek/feature/calendar/presentation/accounting_finance.dart';
 import 'package:kyz_jubek/feature/calendar/presentation/list_deals_page.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
@@ -99,7 +99,7 @@ class CalendarPage extends StatelessWidget {
   }
 }
 
-class TableBodyWidget extends StatelessWidget {
+class TableBodyWidget extends StatefulWidget {
   const TableBodyWidget({
     Key? key,
     this.title1 = 'Дата',
@@ -121,6 +121,24 @@ class TableBodyWidget extends StatelessWidget {
   final double heightOfListView;
 
   @override
+  State<TableBodyWidget> createState() => _TableBodyWidgetState();
+}
+
+class _TableBodyWidgetState extends State<TableBodyWidget> {
+  ScrollController controller1 = ScrollController();
+  ScrollController controller2 = ScrollController();
+  ScrollController controller3 = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    controller1.addListener(() {
+      controller2.jumpTo(controller1.offset);
+      controller3.jumpTo(controller1.offset);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -138,33 +156,36 @@ class TableBodyWidget extends StatelessWidget {
         children: [
           TableRow(
             children: [
-              _TableTitleWidget(title: title1),
-              _TableTitleWidget(title: title2),
-              _TableTitleWidget(title: title3),
+              _TableTitleWidget(title: widget.title1),
+              _TableTitleWidget(title: widget.title2),
+              _TableTitleWidget(title: widget.title3),
             ],
           ),
           TableRow(
             children: [
               SizedBox(
-                height: heightOfListView,
+                height: widget.heightOfListView,
                 child: ListView.separated(
+                  controller: controller1,
+                  key: const PageStorageKey('Value'),
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.only(
-                    right: 10,
-                    left: 10,
+                    left: 2,
                     top: 5,
                     bottom: 5,
                   ),
-                  itemCount: children1.length,
+                  itemCount: widget.children1.length,
                   separatorBuilder: (BuildContext context, int index) =>
                       const SizedBox(height: 10.0),
                   itemBuilder: (BuildContext context, int index) => Text(
-                      '${index + 1}. ${dateFormatMain.format(children1[index].date)}'),
+                      '${index + 1}. ${dateFormatMain.format(widget.children1[index].date)}'),
                 ),
               ),
               SizedBox(
-                height: heightOfListView,
+                height: widget.heightOfListView,
                 child: ListView.separated(
+                  controller: controller2,
+                  key: const PageStorageKey('Value'),
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.only(
                     right: 10,
@@ -172,16 +193,18 @@ class TableBodyWidget extends StatelessWidget {
                     top: 5,
                     bottom: 5,
                   ),
-                  itemCount: children2.length,
+                  itemCount: widget.children2.length,
                   separatorBuilder: (BuildContext context, int index) =>
                       const SizedBox(height: 10.0),
                   itemBuilder: (BuildContext context, int index) =>
-                      Text(children2[index].title2),
+                      Text(widget.children2[index].title2),
                 ),
               ),
               SizedBox(
-                height: heightOfListView,
+                height: widget.heightOfListView,
                 child: ListView.separated(
+                  controller: controller3,
+                  key: const PageStorageKey('Value'),
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.only(
                     right: 10,
@@ -189,11 +212,11 @@ class TableBodyWidget extends StatelessWidget {
                     top: 5,
                     bottom: 5,
                   ),
-                  itemCount: children3.length,
+                  itemCount: widget.children3.length,
                   separatorBuilder: (BuildContext context, int index) =>
                       const SizedBox(height: 10.0),
                   itemBuilder: (BuildContext context, int index) =>
-                      Text(children3[index].title3),
+                      Text(widget.children3[index].title3),
                 ),
               ),
             ],

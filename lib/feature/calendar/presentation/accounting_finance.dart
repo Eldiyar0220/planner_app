@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
-import 'package:kyz_jubek/core/local_storage/local_storage.dart';
-import 'package:kyz_jubek/feature/calendar/data/model.dart';
+import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
+import 'package:kyz_jubek/feature/calendar/domain/calendar_interactor.dart';
 import 'package:kyz_jubek/feature/calendar/presentation/ui/calendar_page.dart';
 import 'package:kyz_jubek/feature/calendar/widgets/show_dialog_widget.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
@@ -16,6 +16,25 @@ class AccountingFinance extends StatefulWidget {
 class _AccountingFinanceState extends State<AccountingFinance> {
   List<TableModel> doxod = [];
   List<TableModel> deals = [];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        final result = await CalendarInteractorImpl.getDeals('finance');
+        if (result.isNotEmpty) {
+          doxod = result;
+        }
+        final resultDeals = await CalendarInteractorImpl.getDeals('deals');
+        if (resultDeals.isNotEmpty) {
+          deals = resultDeals;
+        }
+        setState(() {});
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +63,7 @@ class _AccountingFinanceState extends State<AccountingFinance> {
               onTap: () => ShowDialogWidget.dialogBuilder(
                 context,
                 title: 'Добавить дело',
-              ).then((value) {
+              ).then((value) async {
                 if (value.isNotEmpty) {
                   final result = TableModel(
                     date: DateTime.now(),
@@ -52,10 +71,13 @@ class _AccountingFinanceState extends State<AccountingFinance> {
                     title3: 'empty',
                   );
 
-                  doxod.add(result);
                   setState(() {});
+                  doxod.add(result);
 
-                  LocalStorage.saveData('doxod', doxod);
+                  await CalendarInteractorImpl.setDeals(
+                    tableModel: result,
+                    tableName: 'finance',
+                  );
                 }
               }),
               title: 'Добавить доход',
@@ -77,7 +99,7 @@ class _AccountingFinanceState extends State<AccountingFinance> {
               onTap: () => ShowDialogWidget.dialogBuilder(
                 context,
                 title: 'Добавить дело',
-              ).then((value) {
+              ).then((value) async {
                 if (value.isNotEmpty) {
                   final result = TableModel(
                     date: DateTime.now(),
@@ -88,7 +110,10 @@ class _AccountingFinanceState extends State<AccountingFinance> {
                   deals.add(result);
                   setState(() {});
 
-                  LocalStorage.saveData('deals', deals);
+                  await CalendarInteractorImpl.setDeals(
+                    tableModel: result,
+                    tableName: 'deals',
+                  );
                 }
               }),
               title: 'Добавить доход',
