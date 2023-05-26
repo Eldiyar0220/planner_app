@@ -23,8 +23,8 @@ class _AccountingFinanceState extends State<AccountingFinance> {
       appBar: AppBar(
         title: const Text('Accounting'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
         child: Column(
           children: [
             const SizedBox(height: 10.0),
@@ -60,7 +60,7 @@ class _AccountingFinanceState extends State<AccountingFinance> {
               }),
               title: 'Добавить доход',
             ),
-            const Spacer(),
+            const SizedBox(height: 50.0),
             Text(
               'Расход на __ /__ /_____',
               style: AppTextStyles.s22W700(),
@@ -93,7 +93,6 @@ class _AccountingFinanceState extends State<AccountingFinance> {
               }),
               title: 'Добавить доход',
             ),
-            const Spacer(),
           ],
         ),
       ),
