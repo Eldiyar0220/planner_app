@@ -59,14 +59,14 @@ class _AccountingFinanceState extends State<AccountingFinance> {
                 setState(() {});
               },
               tableName: 'finance',
-              title2: 'Доход666',
+              title2: 'Доход',
               children1: doxod,
             ),
             const SizedBox(height: 20.0),
             MainSimpleButton(
               onTap: () => ShowDialogWidget.dialogBuilder(
                 context,
-                title: 'Добавить дело',
+                title: 'Добавить доход',
               ).then((value) async {
                 if (value.isNotEmpty) {
                   final result = TableModel(
@@ -98,14 +98,14 @@ class _AccountingFinanceState extends State<AccountingFinance> {
                 deals.remove(model);
               },
               tableName: 'deals',
-              title2: 'Доход',
+              title2: 'Расход',
               children1: deals,
             ),
             const SizedBox(height: 20.0),
             MainSimpleButton(
               onTap: () => ShowDialogWidget.dialogBuilder(
                 context,
-                title: 'Добавить дело',
+                title: 'Добавить расход',
               ).then((value) async {
                 if (value.isNotEmpty) {
                   final result = TableModel(
@@ -123,7 +123,7 @@ class _AccountingFinanceState extends State<AccountingFinance> {
                   );
                 }
               }),
-              title: 'Добавить доход',
+              title: 'Добавить расход',
             ),
           ],
         ),

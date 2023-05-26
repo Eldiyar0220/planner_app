@@ -42,7 +42,7 @@ class _ListDealsPageState extends State<ListDealsPage> {
         child: Column(
           children: [
             Text(
-              'Расход на ${listDeals.isNotEmpty ? dateFormatMain.format(listDeals.first.date) : '__ /__ /____'}',
+              'Дела на ${listDeals.isNotEmpty ? dateFormatMain.format(listDeals.first.date) : '__ /__ /____'}',
               style: AppTextStyles.s22W700(),
             ),
             const SizedBox(height: 10.0),

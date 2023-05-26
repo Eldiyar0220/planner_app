@@ -10,6 +10,7 @@ import 'package:kyz_jubek/feature/auth/presentation/auth_cubit/auth_cubit.dart';
 import 'package:kyz_jubek/feature/auth/presentation/ui/auth_page.dart';
 import 'package:kyz_jubek/feature/profile/edit_profile_screen.dart';
 import 'package:kyz_jubek/feature/profile/presentation/ui/widgets/profile_widget.dart';
+import 'package:kyz_jubek/feature/reports/report_main_screen.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -132,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ProfileWidget(
                 title: '12 сфер жизни',
                 icon: Icons.local_florist_outlined,
-                onTap: () async {
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -144,17 +145,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ProfileWidget(
                 title: 'Список целей',
                 icon: Icons.list,
-                onTap: () async {},
+                onTap: () {},
               ),
               ProfileWidget(
                 title: 'Сайты, карты',
                 icon: Icons.map,
-                onTap: () async {},
+                onTap: () {},
               ),
               ProfileWidget(
                 title: 'Подвести итоги',
                 icon: Icons.bar_chart_rounded,
-                onTap: () async {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ReportMainScreen(),
+                    ),
+                  );
+                },
               ),
               ProfileWidget(
                 title: 'Выйти',

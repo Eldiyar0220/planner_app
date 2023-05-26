@@ -3,8 +3,8 @@ import 'package:kyz_jubek/core/components/spaces.dart';
 import 'package:kyz_jubek/feature/home/presentation/widgets/feel_widget.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
 
-Future<void> showFeelDialog(BuildContext context) async {
-  int grade = 0;
+Future<int?> showFeelDialog(BuildContext context) async {
+  int? grade;
   await showDialog(
     context: context,
     builder: (context) => StatefulBuilder(builder: (context, setState) {
@@ -35,6 +35,7 @@ Future<void> showFeelDialog(BuildContext context) async {
                   setState(() {
                     grade = 5;
                   });
+                  Navigator.pop(context);
                 },
               ),
               const SizedBox(height: 12),
@@ -47,6 +48,7 @@ Future<void> showFeelDialog(BuildContext context) async {
                   setState(() {
                     grade = 4;
                   });
+                  Navigator.pop(context);
                 },
               ),
               const SizedBox(height: 12),
@@ -59,6 +61,7 @@ Future<void> showFeelDialog(BuildContext context) async {
                   setState(() {
                     grade = 3;
                   });
+                  Navigator.pop(context);
                 },
               ),
               const SizedBox(height: 12),
@@ -71,6 +74,7 @@ Future<void> showFeelDialog(BuildContext context) async {
                   setState(() {
                     grade = 2;
                   });
+                  Navigator.pop(context);
                 },
               ),
               const SizedBox(height: 12),
@@ -83,6 +87,7 @@ Future<void> showFeelDialog(BuildContext context) async {
                   setState(() {
                     grade = 1;
                   });
+                  Navigator.pop(context);
                 },
               ),
             ],
@@ -91,4 +96,6 @@ Future<void> showFeelDialog(BuildContext context) async {
       );
     }),
   );
+
+  return grade;
 }

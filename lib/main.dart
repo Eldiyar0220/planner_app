@@ -7,12 +7,13 @@ import 'package:kyz_jubek/feature/auth/data/auth_repo.dart';
 import 'package:kyz_jubek/feature/auth/domain/auth_use_case.dart';
 import 'package:kyz_jubek/feature/auth/presentation/auth_cubit/auth_cubit.dart';
 import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
+import 'package:kyz_jubek/feature/home/domain/smile_model.dart';
 import 'package:kyz_jubek/feature/personal_grow/data/repository/personal_grow_repo.dart';
 import 'package:kyz_jubek/feature/personal_grow/domain/personal_grow_interactor.dart';
 import 'package:kyz_jubek/feature/splash/presentation/ui/splash_page.dart';
 import 'package:kyz_jubek/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -22,6 +23,7 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Hive.initFlutter();
   Hive.registerAdapter(TableModelAdapter());
+  Hive.registerAdapter(SmileModelAdapter());
   runApp(
     MultiBlocProvider(
       providers: [
@@ -58,6 +60,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: scaffoldKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(splashFactory: NoSplash.splashFactory),
       title: 'Flutter Demo',
