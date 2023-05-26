@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kyz_jubek/feature/add_note/add_note_main_screen.dart';
 import 'package:kyz_jubek/feature/calendar/presentation/ui/calendar_page.dart';
 import 'package:kyz_jubek/feature/home/presentation/ui/home_page.dart';
 import 'package:kyz_jubek/feature/personal_grow/presentation/ui/personal_grow_page.dart';
@@ -38,7 +39,6 @@ class _BottomNavigatorState extends State<BottomNavigatorPage> {
             topRight: Radius.circular(0),
           ),
           child: BottomNavigationBar(
-            
             backgroundColor: AppColors.color38B6FFBLue,
             type: BottomNavigationBarType.fixed,
             unselectedFontSize: 10,
@@ -88,7 +88,14 @@ class _BottomNavigatorState extends State<BottomNavigatorPage> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 20),
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AddNoteMainScreen(),
+                ),
+              );
+            },
             child: Container(
               height: 60,
               width: 60,

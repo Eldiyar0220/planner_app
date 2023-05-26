@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:kyz_jubek/core/components/custom_app_bar.dart';
 import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
+import 'package:kyz_jubek/feature/add_note/add_note_main_screen.dart';
+import 'package:kyz_jubek/feature/add_note/widgets/add_note_tab_bar_widget.dart';
 import 'package:kyz_jubek/feature/home/presentation/widgets/show_feel_dialog.dart';
 import 'package:kyz_jubek/feature/info/info_screen.dart';
 import 'package:kyz_jubek/feature/reports/report_main_screen.dart';
@@ -112,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const InfoScreen(),
+                              builder: (context) => const AddNoteMainScreen(),
                             ),
                           );
                         },
