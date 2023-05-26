@@ -1,9 +1,9 @@
 import 'package:kyz_jubek/core/constants/app_text_constants.dart';
 import 'package:kyz_jubek/core/local_storage/local_storage.dart';
-import 'package:kyz_jubek/feature/auth/data/auth_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:kyz_jubek/feature/auth/data/user_model.dart';
+import 'package:kyz_jubek/feature/auth/authentication/data/auth_repo.dart';
+import 'package:kyz_jubek/feature/auth/authentication/data/user_model.dart';
 
 class AuthUseCase {
   GetAuthRepo getAuthRepo;

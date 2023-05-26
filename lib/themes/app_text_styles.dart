@@ -214,4 +214,9 @@ abstract class AppTextStyles {
         fontWeight: FontWeight.w700,
         color: color ?? Colors.black,
       );
+  static s40W300({Color? color}) => TextStyle(
+        fontSize: 40,
+        fontWeight: FontWeight.w400,
+        color: color ?? Colors.black,
+      );
 }

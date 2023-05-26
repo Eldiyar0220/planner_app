@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyz_jubek/core/components/loading_indicator.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
-import 'package:kyz_jubek/feature/auth/presentation/auth_cubit/auth_cubit.dart';
-import 'package:kyz_jubek/feature/navigation/presentation/ui/navigation_page.dart';
+import 'package:kyz_jubek/feature/auth/authentication/presentation/auth_cubit/auth_cubit.dart';
+import 'package:kyz_jubek/feature/auth/pin_code/presentation/ui/pin_code_page.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
 
 class AuthPage extends StatefulWidget {
@@ -101,7 +101,7 @@ class AuthPageState extends State<AuthPage> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const BottomNavigatorPage(),
+                              builder: (context) => const PinCodePage(),
                             ),
                           );
                         },
