@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
-import 'package:kyz_jubek/core/local_storage/local_storage.dart';
-import 'package:kyz_jubek/feature/calendar/data/model.dart';
+import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
+import 'package:kyz_jubek/feature/calendar/domain/calendar_interactor.dart';
 import 'package:kyz_jubek/feature/calendar/presentation/ui/calendar_page.dart';
 import 'package:kyz_jubek/feature/calendar/widgets/show_dialog_widget.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
@@ -21,9 +19,11 @@ class _ListDealsPageState extends State<ListDealsPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        LocalStorage.readData('ListDeals').then((result) {
-          log('list $result');
-        });
+        final result = await CalendarInteractorImpl.getDeals('listDeals');
+        if (result.isNotEmpty) {
+          listDeals = result;
+          setState(() {});
+        }
       },
     );
   }
@@ -36,8 +36,8 @@ class _ListDealsPageState extends State<ListDealsPage> {
       appBar: AppBar(
         title: const Text('List Deals'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
         child: Column(
           children: [
             Text(
@@ -56,7 +56,7 @@ class _ListDealsPageState extends State<ListDealsPage> {
               onTap: () => ShowDialogWidget.dialogBuilder(
                 context,
                 title: 'Добавить дело',
-              ).then((value) {
+              ).then((value) async {
                 if (value.isNotEmpty) {
                   final result = TableModel(
                     date: DateTime.now(),
@@ -66,10 +66,10 @@ class _ListDealsPageState extends State<ListDealsPage> {
 
                   listDeals.add(result);
                   setState(() {});
-                  LocalStorage.readData('ListDeals').then((result) {
-                    log('list $result');
-                  });
-                  // LocalStorage.saveData('ListDeals', listDeals);
+                  await CalendarInteractorImpl.setDeals(
+                    tableModel: result,
+                    tableName: 'listDeals',
+                  );
                 }
               }),
               title: 'Добавить дело',

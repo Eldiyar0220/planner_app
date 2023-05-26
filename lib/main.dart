@@ -2,9 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kyz_jubek/feature/auth/data/auth_repo.dart';
 import 'package:kyz_jubek/feature/auth/domain/auth_use_case.dart';
 import 'package:kyz_jubek/feature/auth/presentation/auth_cubit/auth_cubit.dart';
+import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
 import 'package:kyz_jubek/feature/personal_grow/data/repository/personal_grow_repo.dart';
 import 'package:kyz_jubek/feature/personal_grow/domain/personal_grow_interactor.dart';
 import 'package:kyz_jubek/feature/splash/presentation/ui/splash_page.dart';
@@ -18,6 +20,8 @@ void main() async {
   );
   await SharedPreferences.getInstance();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await Hive.initFlutter();
+  Hive.registerAdapter(TableModelAdapter());
   runApp(
     MultiBlocProvider(
       providers: [

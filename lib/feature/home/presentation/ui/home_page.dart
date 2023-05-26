@@ -5,7 +5,6 @@ import 'package:kyz_jubek/core/components/custom_app_bar.dart';
 import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
 import 'package:kyz_jubek/feature/add_note/add_note_main_screen.dart';
-import 'package:kyz_jubek/feature/add_note/widgets/add_note_tab_bar_widget.dart';
 import 'package:kyz_jubek/feature/home/presentation/widgets/show_feel_dialog.dart';
 import 'package:kyz_jubek/feature/info/info_screen.dart';
 import 'package:kyz_jubek/feature/reports/report_main_screen.dart';
@@ -47,14 +46,16 @@ class _HomePageState extends State<HomePage> {
             children: [
               const Spacer(),
               Container(
-                height: 205,
+                height: mQu * 0.4,
                 width: 205,
                 alignment: Alignment.center,
                 decoration: AppDecorations.defaultDeco(
                   color: AppColors.color38B6FFBLue,
                 ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 10,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
