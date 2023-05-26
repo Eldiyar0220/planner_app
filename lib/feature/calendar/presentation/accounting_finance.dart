@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
 import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
 import 'package:kyz_jubek/feature/calendar/domain/calendar_interactor.dart';
@@ -48,15 +49,18 @@ class _AccountingFinanceState extends State<AccountingFinance> {
           children: [
             const SizedBox(height: 10.0),
             Text(
-              'Доход на __ /__ /_____',
+              'Доход на ${doxod.isNotEmpty ? dateFormatMain.format(doxod.first.date) : '__ /__ /____'}',
               style: AppTextStyles.s22W700(),
             ),
             const SizedBox(height: 10.0),
             TableBodyWidget(
-              title2: 'Доход',
+              onTap: (model) {
+                doxod.remove(model);
+                setState(() {});
+              },
+              tableName: 'finance',
+              title2: 'Доход666',
               children1: doxod,
-              children2: doxod,
-              children3: doxod,
             ),
             const SizedBox(height: 20.0),
             MainSimpleButton(
@@ -68,11 +72,11 @@ class _AccountingFinanceState extends State<AccountingFinance> {
                   final result = TableModel(
                     date: DateTime.now(),
                     title2: value,
-                    title3: 'empty',
+                    title3: 'ssdfsdfsdfsdf684784574875',
                   );
 
-                  setState(() {});
                   doxod.add(result);
+                  setState(() {});
 
                   await CalendarInteractorImpl.setDeals(
                     tableModel: result,
@@ -84,15 +88,18 @@ class _AccountingFinanceState extends State<AccountingFinance> {
             ),
             const SizedBox(height: 50.0),
             Text(
-              'Расход на __ /__ /_____',
+              'Расход на ${deals.isNotEmpty ? dateFormatMain.format(deals.first.date) : '__ /__ /____'}',
               style: AppTextStyles.s22W700(),
             ),
             const SizedBox(height: 10.0),
             TableBodyWidget(
+              onTap: (model) {
+                setState(() {});
+                deals.remove(model);
+              },
+              tableName: 'deals',
               title2: 'Доход',
               children1: deals,
-              children2: deals,
-              children3: deals,
             ),
             const SizedBox(height: 20.0),
             MainSimpleButton(

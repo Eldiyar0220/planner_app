@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:kyz_jubek/core/components/custom_app_bar.dart';
 import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
+import 'package:kyz_jubek/feature/calendar/domain/calendar_interactor.dart';
 import 'package:kyz_jubek/feature/calendar/presentation/accounting_finance.dart';
 import 'package:kyz_jubek/feature/calendar/presentation/list_deals_page.dart';
+import 'package:kyz_jubek/feature/calendar/widgets/show_dialog_widget.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_decoration.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
@@ -84,10 +88,17 @@ class CalendarPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10.0),
                   TableBodyWidget(
+                    onTap: (v) {
+                      //  await CalendarInteractorImpl.deleteLoveDiary(
+                      //     tableName: widget.tableName,
+                      //     title: widget.children1[index].title2,
+                      //   );
+                      //   setState(() {});
+                      //   log('delete ${widget.children2[index].title2}');
+                    },
+                    tableName: '',
                     heightOfListView: MediaQuery.of(context).size.height * 0.4,
                     children1: const [],
-                    children2: const [],
-                    children3: const [],
                   )
                 ],
               ),
@@ -106,8 +117,8 @@ class TableBodyWidget extends StatefulWidget {
     this.title2 = 'Дело',
     this.title3 = 'Заметки',
     required this.children1,
-    required this.children2,
-    required this.children3,
+    required this.tableName,
+    required this.onTap,
     this.heightOfListView = 130,
   }) : super(key: key);
 
@@ -116,9 +127,9 @@ class TableBodyWidget extends StatefulWidget {
   final String title3;
 
   final List<TableModel> children1;
-  final List<TableModel> children2;
-  final List<TableModel> children3;
   final double heightOfListView;
+  final String tableName;
+  final Function(TableModel model) onTap;
 
   @override
   State<TableBodyWidget> createState() => _TableBodyWidgetState();
@@ -176,9 +187,11 @@ class _TableBodyWidgetState extends State<TableBodyWidget> {
                   ),
                   itemCount: widget.children1.length,
                   separatorBuilder: (BuildContext context, int index) =>
-                      const SizedBox(height: 10.0),
-                  itemBuilder: (BuildContext context, int index) => Text(
-                      '${index + 1}. ${dateFormatMain.format(widget.children1[index].date)}'),
+                      const SizedBox(height: 25.0),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Text(
+                        '${index + 1}. ${dateFormatMain.format(widget.children1[index].date)}');
+                  },
                 ),
               ),
               SizedBox(
@@ -193,11 +206,15 @@ class _TableBodyWidgetState extends State<TableBodyWidget> {
                     top: 5,
                     bottom: 5,
                   ),
-                  itemCount: widget.children2.length,
+                  itemCount: widget.children1.length,
                   separatorBuilder: (BuildContext context, int index) =>
-                      const SizedBox(height: 10.0),
-                  itemBuilder: (BuildContext context, int index) =>
-                      Text(widget.children2[index].title2),
+                      const SizedBox(height: 25.0),
+                  itemBuilder: (BuildContext context, int index) => Text(
+                    '${index + 1}. ${widget.children1[index].title2}',
+                    style: const TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -212,11 +229,51 @@ class _TableBodyWidgetState extends State<TableBodyWidget> {
                     top: 5,
                     bottom: 5,
                   ),
-                  itemCount: widget.children3.length,
+                  itemCount: widget.children1.length,
                   separatorBuilder: (BuildContext context, int index) =>
-                      const SizedBox(height: 10.0),
-                  itemBuilder: (BuildContext context, int index) =>
-                      Text(widget.children3[index].title3),
+                      const SizedBox(height: 20.0),
+                  itemBuilder: (BuildContext context, int index) => Stack(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                        width: 80,
+                        child: Text(
+                          '${index + 1}. ${widget.children1[index].title3}',
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        child: InkWell(
+                          onTap: () async {
+                            ShowDialogWidget.confirmDelete(
+                              context,
+                              title: widget.children1[index].title2,
+                            ).then((value) async {
+                              if (value) {
+                                try {
+                                  await CalendarInteractorImpl.deleteLoveDiary(
+                                    tableName: widget.tableName,
+                                    title: widget.children1[index].title2,
+                                  );
+                                  widget.onTap(widget.children1[index]);
+                                } catch (e) {
+                                  log('s$e');
+                                }
+                              }
+                            });
+                          },
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
