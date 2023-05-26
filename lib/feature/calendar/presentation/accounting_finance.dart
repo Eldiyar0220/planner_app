@@ -16,7 +16,7 @@ class AccountingFinance extends StatefulWidget {
 
 class _AccountingFinanceState extends State<AccountingFinance> {
   List<TableModel> doxod = [];
-  List<TableModel> deals = [];
+  List<TableModel> listExpenses = [];
 
   @override
   void initState() {
@@ -27,9 +27,10 @@ class _AccountingFinanceState extends State<AccountingFinance> {
         if (result.isNotEmpty) {
           doxod = result;
         }
-        final resultDeals = await CalendarInteractorImpl.getDeals('deals');
-        if (resultDeals.isNotEmpty) {
-          deals = resultDeals;
+        final resultListExpenses =
+            await CalendarInteractorImpl.getDeals('expenses');
+        if (resultListExpenses.isNotEmpty) {
+          listExpenses = resultListExpenses;
         }
         setState(() {});
       },
@@ -67,6 +68,7 @@ class _AccountingFinanceState extends State<AccountingFinance> {
               onTap: () => ShowDialogWidget.dialogBuilder(
                 context,
                 title: 'Добавить доход',
+                keyboardType: TextInputType.number,
               ).then((value) async {
                 if (value.isNotEmpty) {
                   final result = TableModel(
@@ -88,24 +90,25 @@ class _AccountingFinanceState extends State<AccountingFinance> {
             ),
             const SizedBox(height: 50.0),
             Text(
-              'Расход на ${deals.isNotEmpty ? dateFormatMain.format(deals.first.date) : '__ /__ /____'}',
+              'Расход на ${listExpenses.isNotEmpty ? dateFormatMain.format(listExpenses.first.date) : '__ /__ /____'}',
               style: AppTextStyles.s22W700(),
             ),
             const SizedBox(height: 10.0),
             TableBodyWidget(
               onTap: (model) {
+                listExpenses.remove(model);
                 setState(() {});
-                deals.remove(model);
               },
-              tableName: 'deals',
+              tableName: 'expenses',
               title2: 'Расход',
-              children1: deals,
+              children1: listExpenses,
             ),
             const SizedBox(height: 20.0),
             MainSimpleButton(
               onTap: () => ShowDialogWidget.dialogBuilder(
                 context,
                 title: 'Добавить расход',
+                keyboardType: TextInputType.number,
               ).then((value) async {
                 if (value.isNotEmpty) {
                   final result = TableModel(
@@ -114,12 +117,12 @@ class _AccountingFinanceState extends State<AccountingFinance> {
                     title3: 'empty',
                   );
 
-                  deals.add(result);
+                  listExpenses.add(result);
                   setState(() {});
 
                   await CalendarInteractorImpl.setDeals(
                     tableModel: result,
-                    tableName: 'deals',
+                    tableName: 'expenses',
                   );
                 }
               }),

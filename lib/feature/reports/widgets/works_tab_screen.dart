@@ -1,5 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:kyz_jubek/core/components/custom_button.dart';
+import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
+import 'package:kyz_jubek/feature/calendar/domain/calendar_interactor.dart';
 import 'package:kyz_jubek/feature/reports/report_detail_screen.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
@@ -12,6 +16,21 @@ class WorksTabScreen extends StatefulWidget {
 }
 
 class _WorksTabScreenState extends State<WorksTabScreen> {
+  List<TableModel> models = [];
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        final result = await CalendarInteractorImpl.getDeals('listDeals');
+        if (result.isNotEmpty) {
+          models = result;
+          setState(() {});
+        }
+      },
+    );
+  }
+
   String period = 'Месяц';
   @override
   Widget build(BuildContext context) {
@@ -89,20 +108,21 @@ class _WorksTabScreenState extends State<WorksTabScreen> {
                 style: AppTextStyles.s19W400(),
               ),
               Text(
-                '45 дел',
+                models.length.toString(),
                 style: AppTextStyles.s19W700(),
               ),
               const SizedBox(height: 15),
               CustomButton(
                 radius: 15,
                 text: 'Список выполненных дел',
-                onPressed: () {
+                onPressed: () async {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ReportDetailScreen(
+                        listModels: models,
                         title:
-                            'Список выполненных дел за ${period.toLowerCase()}',
+                            'Список выполненных дел за  ${period.toLowerCase()}',
                         subTitle: 'Дело',
                       ),
                     ),
@@ -115,18 +135,19 @@ class _WorksTabScreenState extends State<WorksTabScreen> {
                 style: AppTextStyles.s19W400(),
               ),
               Text(
-                '45 дел',
+                models.length.toString(),
                 style: AppTextStyles.s19W700(),
               ),
               const SizedBox(height: 15),
               CustomButton(
                 radius: 15,
                 text: 'Список невыполненных дел',
-                onPressed: () {
+                onPressed: () async {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ReportDetailScreen(
+                        listModels: models,
                         title:
                             'Список невыполненных дел за ${period.toLowerCase()}',
                         subTitle: 'Дело',
