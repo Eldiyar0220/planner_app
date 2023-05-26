@@ -7,6 +7,7 @@ class ShowDialogWidget {
   static Future<String> dialogBuilder(
     BuildContext context, {
     required String title,
+    TextInputType? keyboardType,
   }) {
     TextEditingController controller = TextEditingController();
     FocusNode accFocusNode = FocusNode();
@@ -21,6 +22,7 @@ class ShowDialogWidget {
           backgroundColor: AppColors.grey,
           title: Text(title),
           content: TextField(
+            keyboardType: keyboardType,
             focusNode: accFocusNode,
             controller: controller,
             decoration: const InputDecoration(

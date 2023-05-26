@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/core/components/spaces.dart';
+import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
 
@@ -9,13 +10,18 @@ class ReportDetailScreen extends StatelessWidget {
     super.key,
     required this.title,
     required this.subTitle,
+    required this.listModels,
   });
   final String title;
   final String subTitle;
+  final List<TableModel> listModels;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.color0180F5BlueDark,
+      ),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -30,7 +36,7 @@ class ReportDetailScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Expanded(
               child: ListView.separated(
-                itemCount: 15,
+                itemCount: listModels.length,
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 12),
                 itemBuilder: (context, index) => Container(
@@ -53,9 +59,7 @@ class ReportDetailScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            dateFormatMain.format(
-                              DateTime.now(),
-                            ),
+                            dateFormatMain.format(listModels[index].date),
                             style: AppTextStyles.s15W700(
                               color: Colors.white,
                             ),
@@ -64,7 +68,7 @@ class ReportDetailScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        '5',
+                        listModels[index].title2,
                         style: AppTextStyles.s16W600(
                           color: Colors.white,
                         ),
