@@ -33,6 +33,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  String date = dateFormatMain.format(DateTime.now());
+
   @override
   Widget build(BuildContext context) {
     final mQu = MediaQuery.of(context).size.width;
@@ -66,22 +68,29 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       const Spacer(),
                       Text(
-                        dateFormatMain.format(DateTime.now()),
+                        date,
                         style: AppTextStyles.s18W400(
                           color: Colors.white,
                         ),
                       ),
                       const Spacer(),
                       MainSimpleButton(
-                        onTap: () {},
-                        title: 'Привычка на сегодня',
-                        height: 30,
-                      ),
-                      const SizedBox(height: 10.0),
-                      MainSimpleButton(
-                        onTap: () {},
-                        title: 'Дела',
-                        height: 30,
+                        onTap: () async {
+                          final DateTime? selectedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2022),
+                            lastDate: DateTime(2122),
+                          );
+
+                          if (selectedDate != null) {
+                            setState(() {
+                              date = dateFormatMain.format(selectedDate);
+                            });
+                          }
+                        },
+                        title: 'Выбрать дату',
+                        height: 50,
                       ),
                     ],
                   ),

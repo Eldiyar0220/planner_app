@@ -143,16 +143,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
               ),
               ProfileWidget(
-                title: 'Список целей',
-                icon: Icons.list,
-                onTap: () {},
-              ),
-              ProfileWidget(
-                title: 'Сайты, карты',
-                icon: Icons.map,
-                onTap: () {},
-              ),
-              ProfileWidget(
                 title: 'Подвести итоги',
                 icon: Icons.bar_chart_rounded,
                 onTap: () {
