@@ -18,24 +18,7 @@ class _AccountingFinanceState extends State<AccountingFinance> {
   List<TableModel> doxod = [];
   List<TableModel> listExpenses = [];
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async {
-        final result = await CalendarInteractorImpl.getDeals('finance');
-        if (result.isNotEmpty) {
-          doxod = result;
-        }
-        final resultListExpenses =
-            await CalendarInteractorImpl.getDeals('expenses');
-        if (resultListExpenses.isNotEmpty) {
-          listExpenses = resultListExpenses;
-        }
-        setState(() {});
-      },
-    );
-  }
+ 
 
   @override
   Widget build(BuildContext context) {

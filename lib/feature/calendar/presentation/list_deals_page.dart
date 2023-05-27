@@ -15,20 +15,6 @@ class ListDealsPage extends StatefulWidget {
 }
 
 class _ListDealsPageState extends State<ListDealsPage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async {
-        final result = await CalendarInteractorImpl.getDeals('listDeals');
-        if (result.isNotEmpty) {
-          listDeals = result;
-          setState(() {});
-        }
-      },
-    );
-  }
-
   List<TableModel> listDeals = [];
   @override
   Widget build(BuildContext context) {
