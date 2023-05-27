@@ -72,23 +72,26 @@ class _WorksListScreenState extends State<WorksListScreen> {
                   );
                 },
                 builder: (context, state) {
-                  return CustomButton(
-                    radius: 8,
-                    text: 'Добавить дело',
-                    onPressed: () async {
-                      final value = await showAddDialog(context, 'дело');
-                      if (value.isNotEmpty) {
-                        final int id = DateTime.now().millisecondsSinceEpoch;
-                        context.read<WorksCubit>().addWorks(
-                              WorkModel(
-                                date: widget.date,
-                                value: value,
-                                id: id,
-                                isComleted: false,
-                              ),
-                            );
-                      }
-                    },
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: CustomButton(
+                      radius: 8,
+                      text: 'Добавить дело',
+                      onPressed: () async {
+                        final value = await showAddDialog(context, 'дело');
+                        if (value.isNotEmpty) {
+                          final int id = DateTime.now().millisecondsSinceEpoch;
+                          context.read<WorksCubit>().addWorks(
+                                WorkModel(
+                                  date: widget.date,
+                                  value: value,
+                                  id: id,
+                                  isComleted: false,
+                                ),
+                              );
+                        }
+                      },
+                    ),
                   );
                 },
               ),
