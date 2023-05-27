@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kyz_jubek/core/components/custom_button.dart';
 import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
 import 'package:kyz_jubek/feature/calendar/domain/calendar_interactor.dart';
-import 'package:kyz_jubek/feature/reports/report_detail_screen.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
 
@@ -143,16 +142,16 @@ class _FinanceTabScreenState extends State<FinanceTabScreen> {
                 radius: 15,
                 text: 'Отчет',
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ReportDetailScreen(
-                        listModels: listFinance,
-                        title: 'Отчет по доходам за ${period.toLowerCase()}',
-                        subTitle: 'Доход',
-                      ),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => ReportDetailScreen(
+                  //       listModels: listFinance,
+                  //       title: 'Отчет по доходам за ${period.toLowerCase()}',
+                  //       subTitle: 'Доход',
+                  //     ),
+                  //   ),
+                  // );
                 },
               ),
               const SizedBox(height: 20),
@@ -171,16 +170,16 @@ class _FinanceTabScreenState extends State<FinanceTabScreen> {
                 radius: 15,
                 text: 'Отчет',
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ReportDetailScreen(
-                        listModels: listExpenses,
-                        title: 'Отчет по расходам за ${period.toLowerCase()}',
-                        subTitle: 'Расход',
-                      ),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => ReportDetailScreen(
+                  //       listModels: listExpenses,
+                  //       title: 'Отчет по расходам за ${period.toLowerCase()}',
+                  //       subTitle: 'Расход',
+                  //     ),
+                  //   ),
+                  // );
                 },
               ),
             ],

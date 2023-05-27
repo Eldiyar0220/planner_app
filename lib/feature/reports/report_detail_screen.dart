@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/core/components/spaces.dart';
-import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
+import 'package:kyz_jubek/feature/calendar/data/models/work_model.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
 
@@ -14,7 +13,7 @@ class ReportDetailScreen extends StatelessWidget {
   });
   final String title;
   final String subTitle;
-  final List<TableModel> listModels;
+  final List<WorkModel> listModels;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +58,7 @@ class ReportDetailScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            dateFormatMain.format(listModels[index].date),
+                            listModels[index].date,
                             style: AppTextStyles.s15W700(
                               color: Colors.white,
                             ),
@@ -68,7 +67,7 @@ class ReportDetailScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        listModels[index].title2,
+                        listModels[index].value,
                         style: AppTextStyles.s16W600(
                           color: Colors.white,
                         ),

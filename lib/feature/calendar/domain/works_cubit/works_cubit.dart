@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/feature/calendar/data/models/work_model.dart';
 
 part 'works_state.dart';
@@ -21,6 +22,29 @@ class WorksCubit extends Cubit<WorksState> {
     }
   }
 
+  getFiltredPeriodWorks(
+    int dates,
+    bool isComplated,
+  ) async {
+    print(dates);
+    emit(const WorksState.loading());
+
+    try {
+      final workBox = await Hive.openBox<WorkModel>('workBox');
+      List<WorkModel> workList = workBox.values.toList();
+
+      workList.removeWhere((e) {
+        DateTime dateFrom = dateFormatMain.parse(e.date);
+        DateTime nowDate = DateTime.now();
+        return nowDate.difference(dateFrom).inDays > dates;
+      });
+      workList.removeWhere((e) => e.isComleted != isComplated);
+      emit(WorksState.successGet(List.from(workList)));
+    } catch (e) {
+      emit(WorksState.error(e.toString()));
+    }
+  }
+
   addWorks(WorkModel model) async {
     emit(const WorksState.loading());
     try {
@@ -33,12 +57,10 @@ class WorksCubit extends Cubit<WorksState> {
   }
 
   deleteWorks(int id) async {
-    emit(const WorksState.loading());
     try {
       final workBox = await Hive.openBox<WorkModel>('workBox');
       final model = workBox.values.toList().singleWhere((e) => e.id == id);
       await model.delete();
-      emit(const WorksState.successAdd());
     } catch (e) {
       emit(WorksState.error(e.toString()));
     }
