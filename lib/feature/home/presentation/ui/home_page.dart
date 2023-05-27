@@ -61,29 +61,11 @@ class _HomePageState extends State<HomePage> {
                     horizontal: 15,
                     vertical: 10,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Spacer(),
-                      Text(
-                        dateFormatMain.format(DateTime.now()),
-                        style: AppTextStyles.s18W400(
-                          color: Colors.white,
-                        ),
-                      ),
-                      const Spacer(),
-                      MainSimpleButton(
-                        onTap: () {},
-                        title: 'Привычка на сегодня',
-                        height: 30,
-                      ),
-                      const SizedBox(height: 10.0),
-                      MainSimpleButton(
-                        onTap: () {},
-                        title: 'Дела',
-                        height: 30,
-                      ),
-                    ],
+                  child: Text(
+                    dateFormatMain.format(DateTime.now()),
+                    style: AppTextStyles.s18W400(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 const Spacer(),
