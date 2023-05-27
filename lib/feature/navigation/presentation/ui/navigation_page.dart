@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kyz_jubek/feature/add_note/add_note_main_screen.dart';
-import 'package:kyz_jubek/feature/calendar/presentation/ui/calendar_page.dart';
+import 'package:kyz_jubek/feature/calendar/presentation/calendar_screen.dart';
 import 'package:kyz_jubek/feature/home/presentation/ui/home_page.dart';
 import 'package:kyz_jubek/feature/personal_grow/presentation/ui/personal_grow_page.dart';
 import 'package:kyz_jubek/feature/profile/presentation/ui/profile_page.dart';
@@ -19,7 +19,7 @@ class _BottomNavigatorState extends State<BottomNavigatorPage> {
 
   List<Widget> pages = [
     const HomePage(),
-    const CalendarPage(),
+    const CalendarScreen(),
     const PersonalGrowPage(),
     const ProfileScreen(),
   ];
