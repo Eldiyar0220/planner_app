@@ -23,7 +23,6 @@ class PersonalGrowCubit extends Cubit<PersonalGrowState> {
         ),
       );
     } catch (e) {
-      log('error $e');
       emit(const PersonalGrowState.error());
     }
   }

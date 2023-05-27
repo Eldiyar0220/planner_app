@@ -1,8 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:kyz_jubek/core/components/custom_button.dart';
-import 'package:kyz_jubek/feature/calendar/data/table_model.dart';
+import 'package:kyz_jubek/feature/calendar/data/models/work_model.dart';
 import 'package:kyz_jubek/feature/calendar/domain/calendar_interactor.dart';
 import 'package:kyz_jubek/feature/reports/report_detail_screen.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
@@ -16,19 +18,23 @@ class WorksTabScreen extends StatefulWidget {
 }
 
 class _WorksTabScreenState extends State<WorksTabScreen> {
-  List<TableModel> models = [];
+  List<WorkModel> models = [];
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        final result = await CalendarInteractorImpl.getDeals('listDeals');
+        final result = await CalendarInteractorImpl.getWorkers('workBox');
         if (result.isNotEmpty) {
           models = result;
           setState(() {});
         }
       },
     );
+  }
+
+  List<WorkModel> doneWork(bool doneOrNo) {
+    return models.where((model) => model.isComleted == doneOrNo).toList();
   }
 
   String period = 'Месяц';
@@ -108,7 +114,7 @@ class _WorksTabScreenState extends State<WorksTabScreen> {
                 style: AppTextStyles.s19W400(),
               ),
               Text(
-                models.length.toString(),
+                '${doneWork(true).length}',
                 style: AppTextStyles.s19W700(),
               ),
               const SizedBox(height: 15),
@@ -120,7 +126,7 @@ class _WorksTabScreenState extends State<WorksTabScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ReportDetailScreen(
-                        listModels: models,
+                        listModels: doneWork(true),
                         title:
                             'Список выполненных дел за  ${period.toLowerCase()}',
                         subTitle: 'Дело',
@@ -135,7 +141,7 @@ class _WorksTabScreenState extends State<WorksTabScreen> {
                 style: AppTextStyles.s19W400(),
               ),
               Text(
-                models.length.toString(),
+                '${doneWork(false).length}',
                 style: AppTextStyles.s19W700(),
               ),
               const SizedBox(height: 15),
@@ -147,7 +153,7 @@ class _WorksTabScreenState extends State<WorksTabScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ReportDetailScreen(
-                        listModels: models,
+                        listModels: doneWork(false),
                         title:
                             'Список невыполненных дел за ${period.toLowerCase()}',
                         subTitle: 'Дело',

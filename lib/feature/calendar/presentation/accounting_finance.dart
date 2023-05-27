@@ -23,14 +23,14 @@ class _AccountingFinanceState extends State<AccountingFinance> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        final result = await CalendarInteractorImpl.getDeals('finance');
+        final result = await CalendarInteractorImpl.getWorkers('finance');
         if (result.isNotEmpty) {
-          doxod = result;
+          // doxod = result;
         }
         final resultListExpenses =
-            await CalendarInteractorImpl.getDeals('expenses');
+            await CalendarInteractorImpl.getWorkers('expenses');
         if (resultListExpenses.isNotEmpty) {
-          listExpenses = resultListExpenses;
+          // listExpenses = resultListExpenses;
         }
         setState(() {});
       },

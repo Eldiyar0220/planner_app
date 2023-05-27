@@ -22,16 +22,16 @@ class _FinanceTabScreenState extends State<FinanceTabScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        final result = await CalendarInteractorImpl.getDeals('finance');
-        if (result.isNotEmpty) {
-          listFinance = result;
-        }
-        final resultListExpenses =
-            await CalendarInteractorImpl.getDeals('expenses');
-        if (resultListExpenses.isNotEmpty) {
-          listExpenses = resultListExpenses;
-        }
-        setState(() {});
+        // final result = await CalendarInteractorImpl.getDeals('finance');
+        // if (result.isNotEmpty) {
+        //   listFinance = result;
+        // }
+        // final resultListExpenses =
+        //     await CalendarInteractorImpl.getDeals('expenses');
+        // if (resultListExpenses.isNotEmpty) {
+        //   listExpenses = resultListExpenses;
+        // }
+        // setState(() {});
       },
     );
   }
@@ -147,7 +147,7 @@ class _FinanceTabScreenState extends State<FinanceTabScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ReportDetailScreen(
-                        listModels: listFinance,
+                        listModels: [],
                         title: 'Отчет по доходам за ${period.toLowerCase()}',
                         subTitle: 'Доход',
                       ),
@@ -175,7 +175,7 @@ class _FinanceTabScreenState extends State<FinanceTabScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ReportDetailScreen(
-                        listModels: listExpenses,
+                        listModels: [],
                         title: 'Отчет по расходам за ${period.toLowerCase()}',
                         subTitle: 'Расход',
                       ),

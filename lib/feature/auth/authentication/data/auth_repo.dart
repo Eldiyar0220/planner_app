@@ -13,7 +13,6 @@ class GetAuthRepoImpl implements GetAuthRepo {
     CollectionReference firestore =
         FirebaseFirestore.instance.collection('users');
     DocumentSnapshot user = await firestore.doc(model.uid).get();
-    log('EDU $user');
     if (user.data() == null) {
       await firestore.doc(model.uid).set(model.toJson());
       return null;

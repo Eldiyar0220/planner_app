@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyz_jubek/core/components/app_error_text.dart';
@@ -33,7 +31,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Календарь', isCanPop: false,),
+      appBar: const CustomAppBar(
+        title: 'Календарь',
+        isCanPop: false,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -122,7 +123,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                               separatorBuilder: (context, index) =>
                                   const SizedBox(height: 12),
                               itemBuilder: (context, index) {
-                                log('EDU ${model[index].isComleted}');
                                 return ItemsWidget(
                                   model: model[index],
                                 );

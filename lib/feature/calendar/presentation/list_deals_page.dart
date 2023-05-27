@@ -20,9 +20,9 @@ class _ListDealsPageState extends State<ListDealsPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        final result = await CalendarInteractorImpl.getDeals('listDeals');
+        final result = await CalendarInteractorImpl.getWorkers('listDeals');
         if (result.isNotEmpty) {
-          listDeals = result;
+          // listDeals = result;
           setState(() {});
         }
       },
