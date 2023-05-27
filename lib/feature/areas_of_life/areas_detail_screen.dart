@@ -94,9 +94,25 @@ class _AreasDetailScreenState extends State<AreasDetailScreen> {
                 hintText: '',
                 controller: controller1,
                 onChanged: (value) {
-                  setState(() {
-                    qwestion1 = value;
-                  });
+                  if (value.isNotEmpty) {
+                    if (int.parse(value) > 20) {
+                      controller1.text = '20';
+                      setState(() {
+                        qwestion1 = '20';
+                      });
+                      controller1.selection = TextSelection.fromPosition(
+                        TextPosition(offset: controller1.text.length),
+                      );
+                    } else {
+                      setState(() {
+                        qwestion1 = value;
+                      });
+                    }
+                  } else {
+                    setState(() {
+                      qwestion1 = value;
+                    });
+                  }
                 },
                 keyboardType: TextInputType.number,
               ),
@@ -110,9 +126,25 @@ class _AreasDetailScreenState extends State<AreasDetailScreen> {
                 hintText: '',
                 controller: controller2,
                 onChanged: (value) {
-                  setState(() {
-                    qwestion2 = value;
-                  });
+                  if (value.isNotEmpty) {
+                    if (int.parse(value) > 20) {
+                      controller2.text = '20';
+                      setState(() {
+                        qwestion2 = '20';
+                      });
+                      controller2.selection = TextSelection.fromPosition(
+                        TextPosition(offset: controller2.text.length),
+                      );
+                    } else {
+                      setState(() {
+                        qwestion2 = value;
+                      });
+                    }
+                  } else {
+                    setState(() {
+                      qwestion2 = value;
+                    });
+                  }
                 },
                 keyboardType: TextInputType.number,
               ),
@@ -126,9 +158,25 @@ class _AreasDetailScreenState extends State<AreasDetailScreen> {
                 hintText: '',
                 controller: controller3,
                 onChanged: (value) {
-                  setState(() {
-                    qwestion3 = value;
-                  });
+                  if (value.isNotEmpty) {
+                    if (int.parse(value) > 20) {
+                      controller3.text = '20';
+                      setState(() {
+                        qwestion3 = '20';
+                      });
+                      controller3.selection = TextSelection.fromPosition(
+                        TextPosition(offset: controller3.text.length),
+                      );
+                    } else {
+                      setState(() {
+                        qwestion3 = value;
+                      });
+                    }
+                  } else {
+                    setState(() {
+                      qwestion3 = value;
+                    });
+                  }
                 },
                 keyboardType: TextInputType.number,
               ),
@@ -142,9 +190,25 @@ class _AreasDetailScreenState extends State<AreasDetailScreen> {
                 hintText: '',
                 controller: controller4,
                 onChanged: (value) {
-                  setState(() {
-                    qwestion4 = value;
-                  });
+                  if (value.isNotEmpty) {
+                    if (int.parse(value) > 20) {
+                      controller4.text = '20';
+                      setState(() {
+                        qwestion4 = '20';
+                      });
+                      controller4.selection = TextSelection.fromPosition(
+                        TextPosition(offset: controller4.text.length),
+                      );
+                    } else {
+                      setState(() {
+                        qwestion4 = value;
+                      });
+                    }
+                  } else {
+                    setState(() {
+                      qwestion4 = value;
+                    });
+                  }
                 },
                 keyboardType: TextInputType.number,
               ),
@@ -158,9 +222,25 @@ class _AreasDetailScreenState extends State<AreasDetailScreen> {
                 hintText: '',
                 controller: controller5,
                 onChanged: (value) {
-                  setState(() {
-                    qwestion5 = value;
-                  });
+                  if (value.isNotEmpty) {
+                    if (int.parse(value) > 20) {
+                      controller5.text = '20';
+                      setState(() {
+                        qwestion5 = '20';
+                      });
+                      controller5.selection = TextSelection.fromPosition(
+                        TextPosition(offset: controller5.text.length),
+                      );
+                    } else {
+                      setState(() {
+                        qwestion5 = value;
+                      });
+                    }
+                  } else {
+                    setState(() {
+                      qwestion5 = value;
+                    });
+                  }
                 },
                 keyboardType: TextInputType.number,
               ),
