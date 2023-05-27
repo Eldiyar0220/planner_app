@@ -33,6 +33,16 @@ class WorksCubit extends Cubit<WorksState> {
       final workBox = await Hive.openBox<WorkModel>('workBox');
       List<WorkModel> workList = workBox.values.toList();
 
+
+///sss
+      workList.add(WorkModel(
+        date: '05/04/2023',
+        value: '5',
+        isComleted: true,
+        id: 1685183035545,
+      ));
+
+
       workList.removeWhere((e) {
         DateTime dateFrom = dateFormatMain.parse(e.date);
         DateTime nowDate = DateTime.now();
