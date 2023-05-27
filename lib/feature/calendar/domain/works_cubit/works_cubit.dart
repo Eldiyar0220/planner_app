@@ -30,8 +30,27 @@ class WorksCubit extends Cubit<WorksState> {
     emit(const WorksState.loading());
 
     try {
+      emit(const WorksState.loading());
       final workBox = await Hive.openBox<WorkModel>('workBox');
       List<WorkModel> workList = workBox.values.toList();
+
+      ///sss
+      workList.addAll([
+        //should showing when click year
+        WorkModel(
+          date: '05/04/2023',
+          value: '5',
+          isComleted: true,
+          id: 1685183035545,
+        ),
+        //should showing when click month
+        WorkModel(
+          date: '05/05/2023',
+          value: '5',
+          isComleted: true,
+          id: 1685183035545312,
+        ),
+      ]);
 
       workList.removeWhere((e) {
         DateTime dateFrom = dateFormatMain.parse(e.date);

@@ -19,4 +19,9 @@ class FinanceModel extends HiveObject {
     required this.type,
     required this.id,
   });
+
+  @override
+  String toString() {
+    return 'FinanceModel(date: $date, value: $value, type: $type, id: $id)';
+  }
 }
