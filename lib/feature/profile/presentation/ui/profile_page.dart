@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
@@ -24,19 +26,17 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  bool valueFinger = false;
+  ValueNotifier valueFinger = ValueNotifier(false);
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final result = await LocalStorage.readData('finger') as bool;
-
-      if (result) {
-        valueFinger = true;
+      final result = await LocalStorage.readData('finger');
+      if (result != null && result) {
+        valueFinger.value = result;
       } else {
-        valueFinger = false;
+        valueFinger.value = false;
       }
-      setState(() {});
     });
   }
 
@@ -173,62 +173,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
               ),
               const SizedBox(height: 10.0),
-              InkWell(
-                splashFactory: NoSplash.splashFactory,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                onTap: () {
-                  valueFinger = !valueFinger;
-                  setState(() {});
-                },
-                child: Container(
-                  width: getWidth(context),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    color: AppColors.color38B6FFBLue,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.fingerprint,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          const SizedBox(width: 10.0),
-                          Text(
-                            'Отпечатка пальца',
-                            style: AppTextStyles.s16W400(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Switch(
-                        trackColor: const MaterialStatePropertyAll(
-                          Colors.white,
+              ValueListenableBuilder(
+                  valueListenable: valueFinger,
+                  builder: (context, _, __) {
+                    return InkWell(
+                      splashFactory: NoSplash.splashFactory,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      onTap: () {
+                        valueFinger.value = !valueFinger.value;
+                        funcSwitcher(valueFinger.value);
+                      },
+                      child: Container(
+                        width: getWidth(context),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          color: AppColors.color38B6FFBLue,
                         ),
-                        inactiveThumbColor: Colors.red.shade300,
-                        activeColor: Colors.green,
-                        value: valueFinger,
-                        onChanged: (v) async {
-                          valueFinger = !valueFinger;
-                          if (v) {
-                            await LocalStorage.saveData('finger', true);
-                          } else {
-                            await LocalStorage.removeData('finger');
-                          }
-                          setState(() {});
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.fingerprint,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                                const SizedBox(width: 10.0),
+                                Text(
+                                  'Отпечатка пальца',
+                                  style: AppTextStyles.s16W400(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Switch(
+                              trackColor: const MaterialStatePropertyAll(
+                                Colors.white,
+                              ),
+                              inactiveThumbColor: Colors.red.shade300,
+                              activeColor: Colors.green,
+                              value: valueFinger.value,
+                              onChanged: (v) async {
+                                valueFinger.value = !valueFinger.value;
+                                funcSwitcher(valueFinger.value);
+                              },
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
               ProfileWidget(
                 title: 'Выйти',
                 icon: Icons.logout,
@@ -285,5 +284,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  funcSwitcher(bool switcher) {
+    if (switcher) {
+      log('bool ${valueFinger.value}');
+      LocalStorage.saveData('finger', switcher);
+    } else if (!valueFinger.value) {
+      LocalStorage.removeData('finger');
+    }
   }
 }

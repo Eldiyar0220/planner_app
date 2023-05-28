@@ -268,7 +268,7 @@ class _PinCodePageState extends State<PinCodePage> {
                                   duration: const Duration(seconds: 3),
                                   padding: const EdgeInsets.all(24),
                                   messageText: Text(
-                                    'Неправильний пин код',
+                                    'Неправильный пин код',
                                     style: AppTextStyles.s15W400(
                                         color: AppColors.white),
                                   ),
