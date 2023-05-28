@@ -1,15 +1,20 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kyz_jubek/core/components/loading_indicator.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
 import 'package:kyz_jubek/core/local_storage/local_storage.dart';
 import 'package:kyz_jubek/feature/auth/authentication/presentation/ui/auth_page.dart';
+import 'package:kyz_jubek/feature/auth/local_auth_finger_print/local_auth_finger_pring.dart';
 import 'package:kyz_jubek/feature/navigation/presentation/ui/navigation_page.dart';
 import 'package:kyz_jubek/feature/splash/presentation/ui/splash_page.dart';
 import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:local_auth_android/local_auth_android.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 enum EnterPintCode { enter, create }
@@ -29,16 +34,31 @@ class _PinCodePageState extends State<PinCodePage> {
   String? installedPinCode;
   ValueNotifier success = ValueNotifier(false);
   EnterPintCode type = EnterPintCode.create;
+  late bool authWithFinger;
 
   @override
   void initState() {
     super.initState();
-    controller1 = TextEditingController();
+
     focusNode = FocusNode();
-    Timer(const Duration(milliseconds: 200), () => focusNode.requestFocus());
+    controller1 = TextEditingController();
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
+        final fingerAuth = await LocalStorage.readData('finger');
+        if (fingerAuth == true) {
+          authWithFinger = fingerAuth;
+          Timer(const Duration(milliseconds: 200),
+              () => _authenticateBiometric());
+        } else {
+          Timer(
+            const Duration(milliseconds: 200),
+            () => focusNode.requestFocus(),
+          );
+          authWithFinger = false;
+        }
+
+        await _checkBiometrics();
         final pinCode = await LocalStorage.readData('user');
 
         if (pinCode == null) {
@@ -66,12 +86,13 @@ class _PinCodePageState extends State<PinCodePage> {
         LocalStorage.saveData('user', installedPinCode);
         success.value = true;
         Future.delayed(const Duration(milliseconds: 1800)).then(
-          (value) => Navigator.pushReplacement(
+          (value) => Navigator.pushAndRemoveUntil(
             context,
             FadeInRoute(
-              const BottomNavigatorPage(),
-              '/navigation',
+              const LocalAuthFingerPrintPage(),
+              '/auth',
             ),
+            (Route<dynamic> route) => false,
           ),
         );
       }
@@ -92,6 +113,74 @@ class _PinCodePageState extends State<PinCodePage> {
   }
 
   final _formKey = GlobalKey<FormState>();
+
+  //local auth
+
+  final androidMessages = const AndroidAuthMessages(
+    cancelButton: 'Отмена',
+    signInTitle: 'Multi Millionaire',
+    goToSettingsButton: 'Настройки',
+    biometricSuccess: 'Успешно',
+    biometricNotRecognized: 'Не распознано',
+    biometricHint: 'Используйте сканер отпечатка пальца',
+    goToSettingsDescription: 'Перейдите в настройки для активации TouchID',
+  );
+  LocalAuthentication auth = LocalAuthentication();
+  bool _canCheckBiometrics = false;
+  final List<BiometricType> _availableBiometric = [];
+  String _authorized = 'Not Authorized';
+
+  Future<void> _checkBiometrics() async {
+    bool canCheckBiometrics = false;
+    try {
+      canCheckBiometrics = await auth.canCheckBiometrics;
+    } on PlatformException catch (e) {
+      print(e);
+    }
+    if (!mounted) return;
+    setState(() {
+      _canCheckBiometrics = canCheckBiometrics;
+    });
+  }
+
+  Future<void> _authenticateBiometric() async {
+    bool authenticated = false;
+    try {
+      if (_canCheckBiometrics) {
+        authenticated = await auth.authenticate(
+          authMessages: [androidMessages],
+          localizedReason: 'Авторизуйтесь чтобы продолжить',
+
+          // useErrorDialogs: true,
+          // stickyAuth: false,
+        );
+      } else {
+        log('error $_canCheckBiometrics');
+      }
+    } on PlatformException catch (e) {
+      log('s$e');
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _authorized = authenticated ? 'Authorized' : 'Not Authorized';
+    });
+    log('cars $_authorized');
+    if (_authorized == 'Authorized') {
+      controller1.text = '****';
+      success.value = true;
+      Future.delayed(const Duration(milliseconds: 1800)).then(
+        (value) => Navigator.pushReplacement(
+          context,
+          FadeInRoute(
+            const BottomNavigatorPage(),
+            '/navigation',
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

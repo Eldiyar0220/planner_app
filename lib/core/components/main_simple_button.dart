@@ -10,12 +10,14 @@ class MainSimpleButton extends StatelessWidget {
     required this.title,
     this.height = 60,
     this.color,
+    this.width,
     this.isLoading = false,
   });
 
   final Function() onTap;
   final String title;
   final double height;
+  final double? width;
   final Color? color;
   final bool isLoading;
 
@@ -27,7 +29,7 @@ class MainSimpleButton extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         height: height,
-        width: MediaQuery.of(context).size.width,
+        width: width ?? MediaQuery.of(context).size.width,
         decoration: AppDecorations.defaultDeco(
           color: color ?? AppColors.black.withOpacity(0.3),
         ),

@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
+import 'package:kyz_jubek/core/components/spaces.dart';
 import 'package:kyz_jubek/core/constants/app_text_constants.dart';
 import 'package:kyz_jubek/core/local_storage/local_storage.dart';
 import 'package:kyz_jubek/feature/areas_of_life/areas_main_screen.dart';
@@ -11,6 +12,7 @@ import 'package:kyz_jubek/feature/auth/authentication/presentation/ui/auth_page.
 import 'package:kyz_jubek/feature/profile/edit_profile_screen.dart';
 import 'package:kyz_jubek/feature/profile/presentation/ui/widgets/profile_widget.dart';
 import 'package:kyz_jubek/feature/reports/report_main_screen.dart';
+import 'package:kyz_jubek/themes/app_colors.dart';
 import 'package:kyz_jubek/themes/app_text_styles.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -22,6 +24,22 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  bool valueFinger = false;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final result = await LocalStorage.readData('finger') as bool;
+
+      if (result) {
+        valueFinger = true;
+      } else {
+        valueFinger = false;
+      }
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,10 +167,67 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ReportMainScreen(),
+                      builder: (contexst) => const ReportMainScreen(),
                     ),
                   );
                 },
+              ),
+              const SizedBox(height: 10.0),
+              InkWell(
+                splashFactory: NoSplash.splashFactory,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                onTap: () {
+                  valueFinger = !valueFinger;
+                  setState(() {});
+                },
+                child: Container(
+                  width: getWidth(context),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    color: AppColors.color38B6FFBLue,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.fingerprint,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          const SizedBox(width: 10.0),
+                          Text(
+                            'Отпечатка пальца',
+                            style: AppTextStyles.s16W400(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Switch(
+                        trackColor: const MaterialStatePropertyAll(
+                          Colors.white,
+                        ),
+                        inactiveThumbColor: Colors.red.shade300,
+                        activeColor: Colors.green,
+                        value: valueFinger,
+                        onChanged: (v) async {
+                          valueFinger = !valueFinger;
+                          if (v) {
+                            await LocalStorage.saveData('finger', true);
+                          } else {
+                            await LocalStorage.removeData('finger');
+                          }
+                          setState(() {});
+                        },
+                      )
+                    ],
+                  ),
+                ),
               ),
               ProfileWidget(
                 title: 'Выйти',

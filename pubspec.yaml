@@ -33,6 +33,8 @@ dependencies:
   hive_flutter: ^1.1.0
   pin_code_fields: ^7.4.0
   another_flushbar: ^1.12.30
+  local_auth: ^2.1.6
+  local_auth_android: ^1.0.28
 
 dev_dependencies:
   flutter_test:

@@ -17,6 +17,8 @@ import 'package:kyz_jubek/feature/splash/presentation/ui/splash_page.dart';
 import 'package:kyz_jubek/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//Not clean architecture, doing project for fast!!!!!!!!
+
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
