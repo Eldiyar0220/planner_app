@@ -38,6 +38,14 @@ class CalendarItemsWidget extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+            const SizedBox(height: 10.0),
+            if (model.notes.isNotEmpty)
+              Text(
+                'Заметки: ${model.notes}',
+                style: AppTextStyles.s18W400(
+                  color: Colors.white,
+                ),
+              ),
             const SizedBox(height: 16),
             Text(
               model.date,

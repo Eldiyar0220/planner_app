@@ -30,24 +30,28 @@ class _FinanceTabScreenState extends State<FinanceTabScreen> {
         if (result.isNotEmpty) {
           listFinance = [
             FinanceModel(
+              notes: '',
               date: '27/03/2023',
               value: 10,
               type: 'Доход',
               id: 16851829812325,
             ),
             FinanceModel(
+              notes: '',
               date: '23/04/2023',
               value: 10,
               type: 'Доход',
               id: 16851829813325,
             ),
             FinanceModel(
+              notes: '',
               date: '27/06/2023',
               value: 15,
               type: 'Доход',
               id: 168518298133235,
             ),
             FinanceModel(
+              notes: '',
               date: '27/05/2023',
               value: 15,
               type: 'Доход',
@@ -61,24 +65,28 @@ class _FinanceTabScreenState extends State<FinanceTabScreen> {
           // listExpenses = resultListExpenses;
           listExpenses = [
             FinanceModel(
+              notes: '',
               date: '27/03/2023',
               value: 10,
               type: 'Доход',
               id: 16851829812325,
             ),
             FinanceModel(
+              notes: '',
               date: '27/04/2023',
               value: 10,
               type: 'Доход',
               id: 16851829813325,
             ),
             FinanceModel(
+              notes: '',
               date: '27/05/2023',
               value: 15,
               type: 'Доход',
               id: 168518298133235,
             ),
             FinanceModel(
+              notes: '',
               date: '27/05/2023',
               value: 15,
               type: 'Доход',

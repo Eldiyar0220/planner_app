@@ -38,6 +38,7 @@ class WorksCubit extends Cubit<WorksState> {
       workList.addAll([
         //should showing when click year
         WorkModel(
+          notes: '',
           date: '05/04/2023',
           value: '5',
           isComleted: true,
@@ -45,6 +46,7 @@ class WorksCubit extends Cubit<WorksState> {
         ),
         //should showing when click month
         WorkModel(
+          notes: '',
           date: '05/05/2023',
           value: '5',
           isComleted: true,

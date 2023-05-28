@@ -43,11 +43,19 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.model.value,
+                          'Дело: ${widget.model.value}',
                           style: AppTextStyles.s18W400(
                             color: Colors.white,
                           ),
                         ),
+                        const SizedBox(height: 10.0),
+                        if (widget.model.notes.isNotEmpty)
+                          Text(
+                            'Заметки: ${widget.model.notes}',
+                            style: AppTextStyles.s18W400(
+                              color: Colors.white,
+                            ),
+                          ),
                         const SizedBox(height: 16),
                         Text(
                           widget.model.date,

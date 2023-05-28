@@ -78,13 +78,15 @@ class _WorksListScreenState extends State<WorksListScreen> {
                       radius: 8,
                       text: 'Добавить дело',
                       onPressed: () async {
-                        final value = await showAddDialog(context, 'дело');
-                        if (value.isNotEmpty) {
+                        final value =
+                            await showAddDialogWithNotes(context, 'дело');
+                        if (value.mainText.isNotEmpty) {
                           final int id = DateTime.now().millisecondsSinceEpoch;
                           context.read<WorksCubit>().addWorks(
                                 WorkModel(
+                                  notes: value.notes,
                                   date: widget.date,
-                                  value: value,
+                                  value: value.mainText,
                                   id: id,
                                   isComleted: false,
                                 ),

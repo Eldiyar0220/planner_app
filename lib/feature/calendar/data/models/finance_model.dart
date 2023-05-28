@@ -12,16 +12,35 @@ class FinanceModel extends HiveObject {
   final String type;
   @HiveField(3)
   final int id;
+  @HiveField(4)
+  final String notes;
 
   FinanceModel({
     required this.date,
     required this.value,
     required this.type,
     required this.id,
+    required this.notes,
   });
 
   @override
-  String toString() {
-    return 'FinanceModel(date: $date, value: $value, type: $type, id: $id)';
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is FinanceModel &&
+        other.date == date &&
+        other.value == value &&
+        other.type == type &&
+        other.id == id &&
+        other.notes == notes;
+  }
+
+  @override
+  int get hashCode {
+    return date.hashCode ^
+        value.hashCode ^
+        type.hashCode ^
+        id.hashCode ^
+        notes.hashCode;
   }
 }

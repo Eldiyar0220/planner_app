@@ -21,13 +21,14 @@ class FinanceModelAdapter extends TypeAdapter<FinanceModel> {
       value: fields[1] as int,
       type: fields[2] as String,
       id: fields[3] as int,
+      notes: fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, FinanceModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.date)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class FinanceModelAdapter extends TypeAdapter<FinanceModel> {
       ..writeByte(2)
       ..write(obj.type)
       ..writeByte(3)
-      ..write(obj.id);
+      ..write(obj.id)
+      ..writeByte(4)
+      ..write(obj.notes);
   }
 
   @override

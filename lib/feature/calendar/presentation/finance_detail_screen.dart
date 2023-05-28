@@ -139,27 +139,31 @@ class _FinanceDetailScreenState extends State<FinanceDetailScreen> {
                     );
                   },
                   builder: (context, state) {
-                    return CustomButton(
-                      radius: 8,
-                      text: 'Добавить ${type.toLowerCase()}',
-                      onPressed: () async {
-                        final value = await showAddDialog(
-                          context,
-                          type.toLowerCase(),
-                          keyboardType: TextInputType.number,
-                        );
-                        if (value.isNotEmpty) {
-                          final int id = DateTime.now().millisecondsSinceEpoch;
-                          context.read<FinanceCubit>().addFinances(
-                                FinanceModel(
-                                  date: widget.date,
-                                  value: int.parse(value),
-                                  type: type,
-                                  id: id,
-                                ),
-                              );
-                        }
-                      },
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: CustomButton(
+                        radius: 8,
+                        text: 'Добавить ${type.toLowerCase()}',
+                        onPressed: () async {
+                          final value = await showAddDialogWithNotes(
+                            context,
+                            type.toLowerCase(),
+                            keyboardType: TextInputType.number,
+                          );
+                          if (value.mainText.isNotEmpty) {
+                            final int id = DateTime.now().millisecondsSinceEpoch;
+                            context.read<FinanceCubit>().addFinances(
+                                  FinanceModel(
+                                    notes: value.notes,
+                                    date: widget.date,
+                                    value: int.parse(value.mainText),
+                                    type: type,
+                                    id: id,
+                                  ),
+                                );
+                          }
+                        },
+                      ),
                     );
                   },
                 ),
