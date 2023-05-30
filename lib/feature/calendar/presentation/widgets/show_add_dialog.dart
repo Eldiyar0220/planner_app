@@ -73,7 +73,7 @@ Future<SomeModel> showAddDialogWithNotes(
         children: [
           CustomTextField(
             keyboardType: keyboardType,
-            hintText: 'Дело',
+            hintText: type,
             onChanged: (value) {
               mainText = value;
             },

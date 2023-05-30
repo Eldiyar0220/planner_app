@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
+import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/feature/calendar/data/models/finance_model.dart';
 
 part 'finance_state.dart';
@@ -28,6 +29,29 @@ class FinanceCubit extends Cubit<FinanceState> {
       final financeBox = await Hive.openBox<FinanceModel>('financeBox');
       await financeBox.add(model);
       emit(const FinanceState.successAdd());
+    } catch (e) {
+      emit(FinanceState.error(e.toString()));
+    }
+  }
+
+  getFiltredPeriodFinances(
+    int dates,
+    String type,
+  ) async {
+    emit(const FinanceState.loading());
+
+    try {
+      emit(const FinanceState.loading());
+      final workBox = await Hive.openBox<FinanceModel>('financeBox');
+      List<FinanceModel> workList = workBox.values.toList();
+
+      workList.removeWhere((e) {
+        DateTime dateFrom = dateFormatMain.parse(e.date);
+        DateTime nowDate = DateTime.now();
+        return nowDate.difference(dateFrom).inDays > dates;
+      });
+      workList.removeWhere((e) => e.type != type);
+      emit(FinanceState.successGet(List.from(workList)));
     } catch (e) {
       emit(FinanceState.error(e.toString()));
     }
