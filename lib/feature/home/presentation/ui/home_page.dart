@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kyz_jubek/core/components/custom_app_bar.dart';
 import 'package:kyz_jubek/core/components/date_formates.dart';
 import 'package:kyz_jubek/core/components/main_simple_button.dart';
 import 'package:kyz_jubek/core/components/styled_toasts.dart';
 import 'package:kyz_jubek/feature/add_note/add_note_main_screen.dart';
 import 'package:kyz_jubek/feature/home/data/smile_cubit/smile_cubit.dart';
+import 'package:kyz_jubek/feature/home/domain/smile_model.dart';
 import 'package:kyz_jubek/feature/home/presentation/widgets/show_feel_dialog.dart';
 import 'package:kyz_jubek/feature/info/info_screen.dart';
 import 'package:kyz_jubek/feature/reports/report_main_screen.dart';
@@ -34,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   String date = dateFormatMain.format(DateTime.now());
+  DateTime feelDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +89,7 @@ class _HomePageState extends State<HomePage> {
                           if (selectedDate != null) {
                             setState(() {
                               date = dateFormatMain.format(selectedDate);
+                              feelDate = selectedDate;
                             });
                           }
                         },
@@ -147,10 +151,24 @@ class _HomePageState extends State<HomePage> {
                           builder: (context, state) {
                             return MainSimpleButton(
                               onTap: () async {
+                                final smileBox =
+                                    await Hive.openBox<SmileModel>('smiles');
+                                final smiles = smileBox.values.toList();
+                                final dates = smiles
+                                    .map<DateTime>((e) => e.date)
+                                    .toList();
                                 final int? grade =
                                     await showFeelDialog(context);
                                 if (grade != null) {
-                                  context.read<SmileCubit>().addSmiles(grade);
+                                  if (dates.contains(feelDate)) {
+                                    context
+                                        .read<SmileCubit>()
+                                        .addSmiles(grade, feelDate);
+                                  } else {
+                                    showErrorSnackBar(
+                                      'Сегодня вы уже добавляли настроение!',
+                                    );
+                                  }
                                 }
                               },
                               title: 'Как вы себы чувствуете?',

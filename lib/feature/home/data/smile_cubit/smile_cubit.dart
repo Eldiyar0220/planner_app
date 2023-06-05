@@ -23,12 +23,12 @@ class SmileCubit extends Cubit<SmileState> {
     }
   }
 
-  addSmiles(int value) async {
+  addSmiles(int value , DateTime date) async {
     emit(const SmileState.loading());
     try {
       final smileBox = await Hive.openBox<SmileModel>('smiles');
       await smileBox.add(
-        SmileModel(date: DateTime.now(), item: value),
+        SmileModel(date: date, item: value),
       );
       emit(const SmileState.successAdd());
     } catch (e) {
