@@ -80,7 +80,6 @@ Future<SomeModel> showAddDialogWithNotes(
           ),
           const SizedBox(height: 10.0),
           CustomTextField(
-            keyboardType: keyboardType,
             hintText: 'Заметки',
             onChanged: (value) {
               notes = value;

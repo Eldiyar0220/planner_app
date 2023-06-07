@@ -151,7 +151,8 @@ class _FinanceDetailScreenState extends State<FinanceDetailScreen> {
                             keyboardType: TextInputType.number,
                           );
                           if (value.mainText.isNotEmpty) {
-                            final int id = DateTime.now().millisecondsSinceEpoch;
+                            final int id =
+                                DateTime.now().millisecondsSinceEpoch;
                             context.read<FinanceCubit>().addFinances(
                                   FinanceModel(
                                     notes: value.notes,

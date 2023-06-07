@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                                   }
                                 }
                               },
-                              title: 'Как вы себы чувствуете?',
+                              title: 'Как вы себя чувствуете?',
                             );
                           },
                         ),
