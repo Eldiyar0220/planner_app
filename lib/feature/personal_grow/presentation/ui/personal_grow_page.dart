@@ -8,6 +8,7 @@ import 'package:kyz_jubek/themes/app_colors.dart';
 
 class PersonalGrowPage extends StatelessWidget {
   const PersonalGrowPage({super.key});
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,7 @@ class PersonalGrowPage extends StatelessWidget {
                   ],
                 ),
                 loading: () => const LoadingIndicator(),
-                error: () => const Text('error'),
+                error: () => const Center(child: Text('Сетевая ошибка')),
               );
             },
           ),

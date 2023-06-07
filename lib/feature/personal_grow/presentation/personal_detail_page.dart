@@ -24,12 +24,6 @@ class PersonalDetailPage extends StatefulWidget {
 class _PersonalDetailPageState extends State<PersonalDetailPage> {
   int _appRate = 5;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
   void _rateStar(int raiting) {
     setState(() {
       _appRate = raiting;
