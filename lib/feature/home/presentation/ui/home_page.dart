@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                                 final int? grade =
                                     await showFeelDialog(context);
                                 if (grade != null) {
-                                  if (dates.contains(feelDate)) {
+                                  if (!dates.contains(feelDate)) {
                                     context
                                         .read<SmileCubit>()
                                         .addSmiles(grade, feelDate);

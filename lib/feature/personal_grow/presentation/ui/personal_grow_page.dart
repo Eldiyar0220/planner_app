@@ -12,7 +12,7 @@ class PersonalGrowPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String booksTitle = 'Книг';
+    const String booksTitle = 'Книги';
     const String filmsTitle = 'Фильмы';
     const String countryTitle = 'Страны';
     return BlocProvider(

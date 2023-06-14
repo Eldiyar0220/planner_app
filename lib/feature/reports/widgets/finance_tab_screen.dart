@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyz_jubek/core/components/app_error_text.dart';
 import 'package:kyz_jubek/core/components/app_indicator.dart';
 import 'package:kyz_jubek/core/components/custom_button.dart';
+import 'package:kyz_jubek/feature/calendar/data/models/finance_model.dart';
 import 'package:kyz_jubek/feature/calendar/domain/finance_cubit/finance_cubit.dart';
 import 'package:kyz_jubek/feature/reports/cubits/filter_finance_cubit/filter_finance_cubit.dart';
 import 'package:kyz_jubek/feature/reports/report_finance_detail_screen.dart';
@@ -127,7 +128,7 @@ class _FinanceTabScreenState extends State<FinanceTabScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            model.length.toString(),
+                            financeSumm(model),
                             style: AppTextStyles.s19W700(),
                           ),
                           const SizedBox(height: 15),
@@ -168,7 +169,7 @@ class _FinanceTabScreenState extends State<FinanceTabScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            model.length.toString(),
+                            financeSumm(model),
                             style: AppTextStyles.s19W700(),
                           ),
                           const SizedBox(height: 15),
@@ -202,4 +203,12 @@ class _FinanceTabScreenState extends State<FinanceTabScreen> {
       ),
     );
   }
+}
+
+String financeSumm(List<FinanceModel> model) {
+  int summ = 0;
+  for (var e in model) {
+    summ += e.value;
+  }
+  return summ.toString();
 }

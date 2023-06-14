@@ -22,68 +22,70 @@ class ReportFinanceDetailScreen extends StatelessWidget {
         backgroundColor: AppColors.color0180F5BlueDark,
       ),
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            const SizedBox(height: 12),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.s19W400(),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: listModels.isEmpty
-                  ? const Center(
-                      child: Text('Пусто'),
-                    )
-                  : ListView.separated(
-                      itemCount: listModels.length,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 12),
-                      itemBuilder: (context, index) => Container(
-                        width: getWidth(context),
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: AppColors.color38B6FFBLue,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '$subTitle:',
-                                  style: AppTextStyles.s15W400(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  listModels[index].date,
-                                  style: AppTextStyles.s15W700(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const SizedBox(height: 12),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.s19W400(),
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: listModels.isEmpty
+                    ? const Center(
+                        child: Text('Пусто'),
+                      )
+                    : ListView.separated(
+                        itemCount: listModels.length,
+                        separatorBuilder: (context, index) =>
                             const SizedBox(height: 12),
-                            Text(
-                              listModels[index].value.toString(),
-                              style: AppTextStyles.s16W600(
-                                color: Colors.white,
+                        itemBuilder: (context, index) => Container(
+                          width: getWidth(context),
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: AppColors.color38B6FFBLue,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '$subTitle:',
+                                    style: AppTextStyles.s15W400(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    listModels[index].date,
+                                    style: AppTextStyles.s15W700(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 12),
+                              Text(
+                                listModels[index].value.toString(),
+                                style: AppTextStyles.s16W600(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

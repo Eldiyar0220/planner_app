@@ -82,27 +82,30 @@ class TabBarPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item.title,
-                          style: AppTextStyles.s15W700(
-                            color: AppColors.black,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.title,
+                            style: AppTextStyles.s15W700(
+                              color: AppColors.black,
+                            ),
                           ),
-                        ),
-                        Text(
-                          item.description,
-                          style: AppTextStyles.s14W500(
-                            color: AppColors.black.withOpacity(0.6),
+                          Text(
+                            item.description,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyles.s14W500(
+                              color: AppColors.black.withOpacity(0.6),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                  const Spacer(),
                   const RotatedBox(
                     quarterTurns: 2,
                     child: Icon(
